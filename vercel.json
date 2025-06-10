@@ -3,14 +3,12 @@
   "builds": [
     {
       "src": "demo/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "out"
-      }
+      "use": "@vercel/next"
     }
   ],
   "routes": [
+    { "handle": "filesystem" },
     { "src": "/_next/static/(.*)", "dest": "/_next/static/$1" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    { "src": "/(.*)", "dest": "/" }
   ]
 }
