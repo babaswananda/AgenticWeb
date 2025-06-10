@@ -1,5 +1,4 @@
 {
-  "name": "agentic-web",
   "version": 2,
   "builds": [
     {
@@ -8,12 +7,6 @@
       "config": {
         "distDir": "dist"
       }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
     }
   ],
   "headers": [
