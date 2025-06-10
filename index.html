@@ -720,6 +720,72 @@
             transform: translateY(-2px);
         }
 
+        /* New CTA Cards */
+        .cta-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(17, 17, 17, 0.8) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-card h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .cta-card p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            background: linear-gradient(135deg, var(--neural-blue) 0%, var(--quantum-purple) 100%);
+            border: none;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .cta-container {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+                margin: 2rem auto;
+            }
+            
+            .cta-card {
+                padding: 1.5rem;
+            }
+        }
+
         /* Referral Banner */
         .referral-banner {
             position: fixed;
@@ -6405,22 +6471,18 @@ The earlier you align, the closer you are to protocol equity, validator control,
 
     </script>
 
-    <!-- Floating CTA for AgenticCard -->
-    <div class="floating-cta" id="agenticcard-cta">
-        <h4>💳 Ready to Activate Your AgenticCard?</h4>
-        <p>Load funds, earn rewards, and make every protocol move count — from one card. Protocol-native financial instruments.</p>
-        <button onclick="window.location.href='agenticcard-portal.html'">🔐 Access Card Portal</button>
-    </div>
-
-    <!-- Referral Incentive Banner -->
-    <div class="referral-banner" id="referral-banner">
-        <div class="referral-content">
-            <span class="referral-icon">🚀</span>
-            <div class="referral-text">
-                <h4>Protocol Alignment — Earn Position</h4>
-                <p>Bring builders, earn 25% protocol equity. Early validators get infrastructure rewards.</p>
-            </div>
-            <button class="referral-btn" onclick="alert('🎯 Protocol Alignment Program\n\nEarn 25% commission on all referrals\n• Lifetime protocol rewards\n• Compound infrastructure equity\n• Validator privileges\n\nShare the protocol, earn your position!')">Get Validator Link</button>
+    <!-- Mobile-friendly CTAs in the main content -->
+    <div class="cta-container">
+        <div class="cta-card">
+            <h4>🚀 Protocol Alignment — Earn Position</h4>
+            <p>Bring builders, earn 25% protocol equity. Early validators get infrastructure rewards.</p>
+            <button class="cta-btn" onclick="alert('🎯 Protocol Alignment Program\n\nEarn 25% commission on all referrals\n• Lifetime protocol rewards\n• Compound infrastructure equity\n• Validator privileges\n\nShare the protocol, earn your position!')">Get Validator Link</button>
+        </div>
+        
+        <div class="cta-card">
+            <h4>💳 Ready to Activate Your AgenticCard?</h4>
+            <p>Load funds, earn rewards, and make every protocol move count — from one card. Protocol-native financial instruments.</p>
+            <button class="cta-btn" onclick="window.location.href='agenticcard-portal.html'">🔐 Access Card Portal</button>
         </div>
     </div>
 </body>
