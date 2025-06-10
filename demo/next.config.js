@@ -2,17 +2,14 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
-  basePath: '',
-  assetPrefix: '',
+  output: 'export',
   images: {
     unoptimized: true,
   },
-  // Ensure static export
-  output: 'export',
-  // Optional: Enable static HTML export
-  distDir: 'out',
-  // Optional: Add a trailing slash to all paths
-  trailingSlash: true,
+  // Disable server-side rendering
+  target: 'serverless',
+  // Generate source maps for better error messages
+  productionBrowserSourceMaps: true,
 };
 
 module.exports = nextConfig;
