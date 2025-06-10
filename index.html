@@ -3342,6 +3342,7 @@
             font-size: clamp(4rem, 10vw, 8rem);
             font-weight: 100;
             background: linear-gradient(135deg, var(--accent) 0%, var(--neural-blue) 50%, var(--accent) 100%);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 2rem;
@@ -4818,107 +4819,92 @@
                     <div class="price-card personal">
                         <div class="price-header">
                             <h3>👤 PERSONAL</h3>
-                            <div class="price">$9<span>/mo</span></div>
+                            <div class="price">$49<span>/mo</span></div>
                             <p>Prepaid via CrossMint — Self-custody access</p>
                         </div>
                         <div class="price-features">
-                            <div class="feature-highlight">✓ 1 AI agent</div>
-                            <div class="feature-highlight">✓ 2GB memory</div>
-                            <div class="feature-highlight">✓ Single-user auth</div>
-                            <div class="feature-highlight">✓ 1 AYD handle</div>
+                            <div class="feature-highlight">✓ 10GB Data Cap</div>
+                            <div class="feature-highlight">✓ 1 Device</div>
+                            <div class="feature-highlight">✓ Free AI Email</div>
                             <div class="feature-highlight">✓ Basic SLA</div>
+                            <div class="feature-highlight">✓ HNS.ID Domain</div>
                         </div>
                         <button class="price-btn" onclick="startSignup('personal')">👤 Choose Personal</button>
                     </div>
                     <div class="price-card pro">
                         <div class="price-header">
                             <h3>⚡ PRO</h3>
-                            <div class="price">$49<span>/mo</span></div>
-                            <p>Prepaid or Monthly via HNS.ID — Domain-native identity</p>
+                            <div class="price">$99<span>/mo</span></div>
+                            <p>Prepaid via CrossMint — Priority access</p>
                         </div>
                         <div class="price-features">
-                            <div class="feature-highlight">✓ Up to 3 AI agents</div>
-                            <div class="feature-highlight">✓ 10GB shared memory</div>
-                            <div class="feature-highlight">✓ Multi-device auth</div>
-                            <div class="feature-highlight">✓ Up to 3 AYD handles</div>
-                            <div class="feature-highlight">✓ SLA dashboard</div>
+                            <div class="feature-highlight">✓ 25GB Data Cap</div>
+                            <div class="feature-highlight">✓ 2 Devices</div>
+                            <div class="feature-highlight">✓ Priority AI Queue</div>
+                            <div class="feature-highlight">✓ Free AI Email</div>
+                            <div class="feature-highlight">✓ HNS.ID Domain</div>
                         </div>
                         <button class="price-btn" onclick="startSignup('pro')">⚡ Choose Pro</button>
                     </div>
                     <div class="price-card home-family">
                         <div class="price-header">
                             <h3>🏠 HOME & FAMILY</h3>
-                            <div class="price">$99<span>/mo</span></div>
-                            <p>Subscription or Credit</p>
+                            <div class="price">$149<span>/mo</span></div>
+                            <p>Shared access for your household</p>
                         </div>
                         <div class="price-features">
-                            <div class="feature-highlight">✓ Family accounts</div>
-                            <div class="feature-highlight">✓ Multiple workspaces</div>
-                            <div class="feature-highlight">✓ Enhanced memory</div>
-                            <div class="feature-highlight">✓ Priority support</div>
-                            <div class="feature-highlight">✓ Parental controls</div>
+                            <div class="feature-highlight">✓ 50GB Shared Data</div>
+                            <div class="feature-highlight">✓ Up to 5 Devices</div>
+                            <div class="feature-highlight">✓ Shared AI Workspace</div>
+                            <div class="feature-highlight">✓ Family Controls</div>
+                            <div class="feature-highlight">✓ HNS.ID for Family</div>
                         </div>
                         <button class="price-btn" onclick="startSignup('home')">🏠 Choose Home & Family</button>
                     </div>
                     <div class="price-card business featured">
                         <div class="price-header">
                             <h3>🏢 BUSINESS</h3>
-                            <div class="price">$299<span>+/mo</span></div>
-                            <p>Credit via CrossMint Enterprise — Protocol equity access</p>
+                            <div class="price">$199<span>/mo</span></div>
+                            <p>For growing teams and businesses</p>
                         </div>
                         <div class="price-features">
-                            <div class="feature-highlight">✓ 5-500 AI agents</div>
-                            <div class="feature-highlight">✓ 500GB+ vector storage</div>
-                            <div class="feature-highlight">✓ Private GPU pods</div>
-                            <div class="feature-highlight">✓ Custom SLA tiers</div>
-                            <div class="feature-highlight">✓ Enterprise billing</div>
+                            <div class="feature-highlight">✓ 100GB Data</div>
+                            <div class="feature-highlight">✓ Up to 10 Users</div>
+                            <div class="feature-highlight">✓ AI Admin Suite</div>
+                            <div class="feature-highlight">✓ Agent Sync</div>
+                            <div class="feature-highlight">✓ Business Dashboard</div>
                         </div>
                         <button class="price-btn" onclick="startSignup('business')">🏢 Choose Business</button>
-                    </div>
-                    <div class="price-card enterprise">
-                        <div class="price-header">
-                            <h3>🧱 ENTERPRISE</h3>
-                            <div class="price">Demo<span> Only</span></div>
-                            <p>Contracted | Dedicated SLA | Custom Infra</p>
-                        </div>
-                        <div class="price-features">
-                            <div class="feature-highlight">✓ Unlimited agents</div>
-                            <div class="feature-highlight">✓ Custom infrastructure</div>
-                            <div class="feature-highlight">✓ White-label environments</div>
-                            <div class="feature-highlight">✓ Dedicated SLA</div>
-                            <div class="feature-highlight">✓ Protocol tranche access</div>
-                        </div>
-                        <button class="price-btn" onclick="startSignup('enterprise')">🧱 Choose Enterprise</button>
                     </div>
                     <div class="price-card education">
                         <div class="price-header">
                             <h3>🎓 EDUCATION</h3>
                             <div class="price">50%<span> off</span></div>
-                            <p>Admin + Bulk license control</p>
+                            <p>Special pricing for educational institutions</p>
                         </div>
                         <div class="price-features">
-                            <div class="feature-highlight">✓ Per classroom/dept agents</div>
-                            <div class="feature-highlight">✓ Student-safe memory</div>
-                            <div class="feature-highlight">✓ Faculty controls</div>
-                            <div class="feature-highlight">✓ School-managed domains</div>
-                            <div class="feature-highlight">✓ Educational discounts</div>
+                            <div class="feature-highlight">✓ Custom Data Plans</div>
+                            <div class="feature-highlight">✓ Bulk Licenses</div>
+                            <div class="feature-highlight">✓ FERPA Compliant</div>
+                            <div class="feature-highlight">✓ LMS Integration</div>
+                            <div class="feature-highlight">✓ Campus-wide Access</div>
                         </div>
-                        <button class="price-btn" onclick="startSignup('education')">🎓 Choose Education</button>
+                        <button class="price-btn" onclick="startSignup('education')">🎓 Learn More</button>
                     </div>
                     <div class="price-card government">
                         <div class="price-header">
-                            <h3>🏛️ GOVERNMENT</h3>
-                            <div class="price">GSA<span> Schedule</span></div>
-                            <p>Compliance-first, air-gapped</p>
+                            <h3>🏛 GOVERNMENT</h3>
+                            <div class="price">Custom<span> Pricing</span></div>
+                            <p>Secure solutions for government use</p>
                         </div>
                         <div class="price-features">
-                            <div class="feature-highlight">✓ Military-grade agents</div>
-                            <div class="feature-highlight">✓ Air-gapped deployment</div>
-                            <div class="feature-highlight">✓ Sovereign domains</div>
-                            <div class="feature-highlight">✓ Clearance controls</div>
-                            <div class="feature-highlight">✓ Compliance-first</div>
+                            <div class="feature-highlight">✓ Custom Infrastructure</div>
+                            <div class="feature-highlight">✓ Air-Gapped Options</div>
+                            <div class="feature-highlight">✓ FedRAMP Ready</div>
+                            <div class="feature-highlight">✓ Mission Support</div>
+                            <div class="feature-highlight">✓ 24/7 Priority Support</div>
                         </div>
-                        <button class="price-btn" onclick="startSignup('government')">🏛️ Choose Government</button>
+                        <button class="price-btn" onclick="startSignup('government')">🏛 Contact Sales</button>
                     </div>
                 </div>
 
@@ -6454,16 +6440,55 @@ The earlier you align, the closer you are to protocol equity, validator control,
                 'home': 'signup-home-family.html',
                 'business': 'signup-business.html',
                 'education': 'signup-education.html',
-                'government': 'signup-government.html'
+                'government': 'contact-sales.html'
             };
 
-            if (plan === 'enterprise') {
-                alert('🧱 Enterprise Demo\n\nEnterprise tier is currently in demo mode.\n\nFeatures include:\n• $999+/mo custom pricing\n• Dedicated SLA contracts\n• Custom infrastructure\n• White-label environments\n• Protocol tranche access\n• SPV-backed funding\n\nContact sales for enterprise deployment.');
+            const planInfo = {
+                'personal': {
+                    name: 'Personal',
+                    price: '$49/mo',
+                    features: ['10GB Data Cap', '1 Device', 'Free AI Email', 'Basic SLA', 'HNS.ID Domain']
+                },
+                'pro': {
+                    name: 'Pro',
+                    price: '$99/mo',
+                    features: ['25GB Data Cap', '2 Devices', 'Priority AI Queue', 'Free AI Email', 'HNS.ID Domain']
+                },
+                'home': {
+                    name: 'Home & Family',
+                    price: '$149/mo',
+                    features: ['50GB Shared Data', 'Up to 5 Devices', 'Shared AI Workspace', 'Family Controls', 'HNS.ID for Family']
+                },
+                'business': {
+                    name: 'Business',
+                    price: '$199/mo',
+                    features: ['100GB Data', 'Up to 10 Users', 'AI Admin Suite', 'Agent Sync', 'Business Dashboard']
+                },
+                'education': {
+                    name: 'Education',
+                    price: '50% off',
+                    features: ['Custom Data Plans', 'Bulk Licenses', 'FERPA Compliant', 'LMS Integration', 'Campus-wide Access']
+                },
+                'government': {
+                    name: 'Government',
+                    price: 'Custom Pricing',
+                    features: ['Custom Infrastructure', 'Air-Gapped Options', 'FedRAMP Ready', 'Mission Support', '24/7 Priority Support']
+                }
+            };
+
+            if (plan === 'government' || plan === 'education') {
+                // Redirect to contact sales for these plans
+                window.location.href = signupUrls[plan];
                 return;
             }
 
-            if (signupUrls[plan]) {
-                window.location.href = signupUrls[plan];
+            if (planInfo[plan]) {
+                const info = planInfo[plan];
+                const confirmMessage = `You've selected the ${info.name} plan at ${info.price}.\n\nFeatures include:\n• ${info.features.join('\n• ')}\n\nContinue to signup?`;
+                
+                if (confirm(confirmMessage)) {
+                    window.location.href = signupUrls[plan] || 'signup.html';
+                }
             } else {
                 console.error('Unknown plan:', plan);
             }
