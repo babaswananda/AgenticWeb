@@ -2,10 +2,17 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  basePath: '',
+  assetPrefix: '',
   images: {
     unoptimized: true,
   },
-  // Add any other configurations here
+  // Ensure static export
+  output: 'export',
+  // Optional: Enable static HTML export
+  distDir: 'out',
+  // Optional: Add a trailing slash to all paths
+  trailingSlash: true,
 };
 
 module.exports = nextConfig;
