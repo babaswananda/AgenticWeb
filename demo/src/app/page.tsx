@@ -5,8 +5,8 @@ export default function Home() {
     <div>
       <div className="container">
         <h1>Agentic Web Demo</h1>
-        <div className="border rounded-lg p-4 bg-gray-50">
-          <p className="mb-4">This is a placeholder for the Agentic Web Chat Stream Engine demo.</p>
+        <div className="demo-box">
+          <p>This is a placeholder for the Agentic Web Chat Stream Engine demo.</p>
           <p>Your library is ready to be used here. The actual implementation would go in this component.</p>
         </div>
       </div>
