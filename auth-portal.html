@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication Portal | Agentic Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #ffffff;
+            --neural-blue: #00d4ff;
+            --quantum-purple: #8b5cf6;
+            --energy-green: #10b981;
+            --gold: #d4af37;
+            --platinum: #e5e7eb;
+            --dark-bg: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--neural-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links button:hover {
+            color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Main Content */
+        .main {
+            padding: 120px 0 80px 0;
+            min-height: 100vh;
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .auth-header h1 {
+            font-size: 2.5rem;
+            font-weight: 100;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .auth-header p {
+            color: var(--neural-blue);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .auth-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .auth-method {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .auth-method:hover {
+            border-color: var(--neural-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.1);
+        }
+
+        .auth-method.primary {
+            border-color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .auth-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--neural-blue);
+        }
+
+        .auth-method h3 {
+            color: var(--accent);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .auth-method p {
+            color: var(--platinum);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .auth-btn {
+            background: linear-gradient(135deg, var(--neural-blue) 0%, var(--quantum-purple) 100%);
+            color: var(--accent);
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .tier-selector {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .tier-selector h3 {
+            color: var(--gold);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .tier-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .tier-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .tier-option:hover {
+            border-color: var(--neural-blue);
+            transform: translateY(-2px);
+        }
+
+        .tier-option.selected {
+            border-color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .tier-option .tier-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .tier-option .tier-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+        }
+
+        .tier-option .tier-price {
+            font-size: 0.7rem;
+            color: var(--platinum);
+        }
+
+        .status-panel {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .status-panel h3 {
+            color: var(--neural-blue);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .status-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .status-dot.ready {
+            background: var(--energy-green);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+
+        .status-dot.pending {
+            background: var(--gold);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .continue-btn {
+            background: linear-gradient(135deg, var(--energy-green) 0%, var(--neural-blue) 100%);
+            color: var(--accent);
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Clean Footer */
+        .footer {
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--primary);
+            margin-top: 4rem;
+        }
+
+        .footer p {
+            color: var(--platinum);
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .auth-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tier-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="nav-logo">AGENTIC🌐</a>
+            <div class="nav-links">
+                <button onclick="window.location.href='aiva.html'">AIVA</button>
+                <button onclick="window.location.href='fugio.html'">Fugio</button>
+                <button onclick="window.location.href='vibecoder.html'">VibeCoder</button>
+                <button onclick="window.location.href='enterprise.html'">Enterprise</button>
+                <button onclick="window.location.href='contact.html'">Contact</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="auth-header">
+                <h1>🔐 Authentication Portal</h1>
+                <p>Secure gateway to your AI infrastructure</p>
+            </div>
+
+            <!-- Tier Selection -->
+            <div class="tier-selector">
+                <h3>Select Your Service Tier</h3>
+                <div class="tier-options">
+                    <div class="tier-option" onclick="selectTier(this, 'personal')">
+                        <div class="tier-icon">👤</div>
+                        <div class="tier-name">PERSONAL</div>
+                        <div class="tier-price">$9/mo</div>
+                    </div>
+                    <div class="tier-option" onclick="selectTier(this, 'pro')">
+                        <div class="tier-icon">⚡</div>
+                        <div class="tier-name">PRO</div>
+                        <div class="tier-price">$49/mo</div>
+                    </div>
+                    <div class="tier-option" onclick="selectTier(this, 'business')">
+                        <div class="tier-icon">🏢</div>
+                        <div class="tier-name">BUSINESS</div>
+                        <div class="tier-price">Custom</div>
+                    </div>
+                    <div class="tier-option" onclick="selectTier(this, 'education')">
+                        <div class="tier-icon">🎓</div>
+                        <div class="tier-name">EDUCATION</div>
+                        <div class="tier-price">50% off</div>
+                    </div>
+                    <div class="tier-option" onclick="selectTier(this, 'government')">
+                        <div class="tier-icon">🏛️</div>
+                        <div class="tier-name">GOVERNMENT</div>
+                        <div class="tier-price">GSA</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Authentication Methods -->
+            <div class="auth-grid">
+                <div class="auth-method primary" onclick="connectCrossMint()">
+                    <div class="auth-icon">🔗</div>
+                    <h3>CrossMint Wallet</h3>
+                    <p>Primary authentication method. Connect your CrossMint wallet to access your HNS.ID domain and payment gateway.</p>
+                    <button class="auth-btn">Connect CrossMint</button>
+                </div>
+
+                <div class="auth-method" onclick="connectSSO()">
+                    <div class="auth-icon">🏢</div>
+                    <h3>Enterprise SSO</h3>
+                    <p>For Business, Education, and Government tiers. Federated login with your organization's identity provider.</p>
+                    <button class="auth-btn">Enterprise Login</button>
+                </div>
+
+                <div class="auth-method" onclick="connectMultiDevice()">
+                    <div class="auth-icon">📱</div>
+                    <h3>Multi-Device Auth</h3>
+                    <p>Pro tier and above. Secure authentication across multiple devices with 2FA and biometric verification.</p>
+                    <button class="auth-btn">Setup Multi-Device</button>
+                </div>
+            </div>
+
+            <!-- Status Panel -->
+            <div class="status-panel">
+                <h3>🚀 Authentication Status</h3>
+                <div class="status-items">
+                    <div class="status-item">
+                        <div class="status-dot ready"></div>
+                        <span>CrossMint Infrastructure Online</span>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-dot ready"></div>
+                        <span>HNS.ID Registry Active</span>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-dot ready"></div>
+                        <span>Payment Rails Operational</span>
+                    </div>
+                    <div class="status-item">
+                        <div class="status-dot pending"></div>
+                        <span>Awaiting User Authentication</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="continue-btn" onclick="proceedToNetwork()">
+                Continue to Network Configuration
+            </button>
+        </div>
+    </main>
+
+    <!-- Clean Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Agentic Web. Enterprise AI Infrastructure.</p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedTier = null;
+
+        function selectTier(element, tier) {
+            document.querySelectorAll('.tier-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedTier = tier;
+        }
+
+        function connectCrossMint() {
+            if (!selectedTier) {
+                alert('Please select a service tier first.');
+                return;
+            }
+            alert(`🔗 CrossMint Authentication\n\nConnecting to CrossMint for ${selectedTier.toUpperCase()} tier...\n\n• Wallet verification\n• HNS.ID domain claiming\n• Payment gateway setup\n• Identity verification\n\nRedirecting to CrossMint...`);
+        }
+
+        function connectSSO() {
+            if (!selectedTier) {
+                alert('Please select a service tier first.');
+                return;
+            }
+            if (!['business', 'education', 'government'].includes(selectedTier)) {
+                alert('Enterprise SSO is only available for Business, Education, and Government tiers.');
+                return;
+            }
+            alert(`🏢 Enterprise SSO\n\nInitiating federated login for ${selectedTier.toUpperCase()} tier...\n\n• SAML/OAuth integration\n• Directory synchronization\n• Role-based access control\n• Compliance verification\n\nRedirecting to your identity provider...`);
+        }
+
+        function connectMultiDevice() {
+            if (!selectedTier) {
+                alert('Please select a service tier first.');
+                return;
+            }
+            if (selectedTier === 'personal') {
+                alert('Multi-device authentication is available for Pro tier and above. Please upgrade your plan.');
+                return;
+            }
+            alert(`📱 Multi-Device Authentication\n\nSetting up enhanced security for ${selectedTier.toUpperCase()} tier...\n\n• 2FA configuration\n• Biometric enrollment\n• Device registration\n• Security key setup\n\nProceeding to security setup...`);
+        }
+
+        function proceedToNetwork() {
+            if (!selectedTier) {
+                alert('Please complete authentication first by selecting a tier and connecting your wallet.');
+                return;
+            }
+            window.location.href = 'network-config.html';
+        }
+    </script>
+</body>
+</html>

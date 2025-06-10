@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home & Family Plan Signup | Agentic Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #ffffff;
+            --neural-blue: #00d4ff;
+            --quantum-purple: #8b5cf6;
+            --energy-green: #10b981;
+            --gold: #d4af37;
+            --platinum: #e5e7eb;
+            --family-orange: #ff6b35;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--neural-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links button:hover {
+            color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .main {
+            padding: 120px 0 80px 0;
+            min-height: 100vh;
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .signup-header h1 {
+            font-size: 2.5rem;
+            font-weight: 100;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .family-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--family-orange) 0%, var(--energy-green) 100%);
+            color: var(--accent);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .signup-header p {
+            color: var(--family-orange);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .family-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .feature-card h4 {
+            color: var(--family-orange);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-card li {
+            color: var(--platinum);
+            font-size: 0.85rem;
+            padding: 0.25rem 0;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .feature-card li::before {
+            content: "🏠";
+            position: absolute;
+            left: 0;
+            color: var(--family-orange);
+        }
+
+        .signup-form {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .form-section h3 {
+            color: var(--family-orange);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--accent);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--family-orange);
+            box-shadow: 0 0 0 2px rgba(255, 107, 53, 0.2);
+        }
+
+        .family-members {
+            background: rgba(255, 107, 53, 0.05);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .member-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .remove-btn {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff6b6b;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background: rgba(255, 0, 0, 0.3);
+        }
+
+        .add-member-btn {
+            background: rgba(255, 107, 53, 0.2);
+            border: 1px solid var(--family-orange);
+            color: var(--family-orange);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .add-member-btn:hover {
+            background: var(--family-orange);
+            color: var(--accent);
+        }
+
+        .wallet-connect {
+            background: linear-gradient(135deg, var(--family-orange) 0%, var(--energy-green) 100%);
+            color: var(--accent);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .wallet-connect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .plan-summary {
+            background: rgba(255, 107, 53, 0.05);
+            border: 1px solid rgba(255, 107, 53, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .plan-summary h3 {
+            color: var(--family-orange);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            color: var(--family-orange);
+        }
+
+        .signup-btn {
+            background: linear-gradient(135deg, var(--family-orange) 0%, var(--energy-green) 100%);
+            color: var(--accent);
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .signup-form {
+                padding: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .family-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .member-item {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav-logo">AGENTIC🌐</a>
+            <div class="nav-links">
+                <button onclick="window.location.href='aiva.html'">AIVA</button>
+                <button onclick="window.location.href='fugio.html'">Fugio</button>
+                <button onclick="window.location.href='vibecoder.html'">VibeCoder</button>
+                <button onclick="window.location.href='enterprise.html'">Enterprise</button>
+                <button onclick="window.location.href='contact.html'">Contact</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="signup-header">
+                <div class="family-badge">🏠 HOME & FAMILY PLAN</div>
+                <h1>Home & Family Signup</h1>
+                <p>Shared AI workspace for your entire household</p>
+            </div>
+
+            <!-- Family Features Overview -->
+            <div class="family-features">
+                <div class="feature-card">
+                    <h4>👨‍👩‍👧‍👦 Family Sharing</h4>
+                    <ul>
+                        <li>Up to 5 family members</li>
+                        <li>Shared AI agents & memory</li>
+                        <li>Parental controls included</li>
+                        <li>Individual privacy settings</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>🤖 Enhanced AI Access</h4>
+                    <ul>
+                        <li>5 AI agents total</li>
+                        <li>50GB shared memory pool</li>
+                        <li>Family-safe content filters</li>
+                        <li>Educational mode for kids</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>🏠 Household Management</h4>
+                    <ul>
+                        <li>Smart home integration</li>
+                        <li>Family calendar sync</li>
+                        <li>Shared workspaces</li>
+                        <li>Usage monitoring</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>💳 Flexible Billing</h4>
+                    <ul>
+                        <li>Subscription or credit terms</li>
+                        <li>Family domain included</li>
+                        <li>Bulk usage discounts</li>
+                        <li>Transparent usage tracking</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="signup-form">
+                <!-- Primary Account Holder -->
+                <div class="form-section">
+                    <h3>👤 Primary Account Holder</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="holder-name">Full Name</label>
+                            <input type="text" id="holder-name" placeholder="John Smith" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="holder-email">Email Address</label>
+                            <input type="email" id="holder-email" placeholder="john@family.com" required>
+                        </div>
+                    </div>
+                    <button class="wallet-connect" onclick="connectFamilyWallet()">
+                        🏠 Connect Family CrossMint Wallet
+                    </button>
+                    <div class="form-group">
+                        <label for="family-domain">Family HNS.ID Domain</label>
+                        <input type="text" id="family-domain" placeholder="smith-family" style="text-align: center;">
+                        <p style="color: var(--platinum); font-size: 0.8rem; margin-top: 0.5rem; text-align: center;">
+                            Will become: smith-family.hns.id (shared by all family members)
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Family Members -->
+                <div class="family-members">
+                    <h3>👨‍👩‍👧‍👦 Add Family Members (Up to 5 total)</h3>
+                    <div id="family-members-list">
+                        <div class="member-item">
+                            <input type="text" placeholder="Family member name" value="John Smith (Primary)">
+                            <input type="email" placeholder="email@family.com" value="john@family.com">
+                            <select disabled>
+                                <option>Admin</option>
+                            </select>
+                            <span style="color: var(--family-orange); font-size: 0.8rem;">Primary</span>
+                        </div>
+                    </div>
+                    <button class="add-member-btn" onclick="addFamilyMember()">+ Add Family Member</button>
+                </div>
+
+                <!-- Household Settings -->
+                <div class="form-section">
+                    <h3>🏠 Household Settings</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="household-type">Household Type</label>
+                            <select id="household-type" required>
+                                <option value="">Select type</option>
+                                <option value="nuclear">Nuclear Family</option>
+                                <option value="extended">Extended Family</option>
+                                <option value="single-parent">Single Parent</option>
+                                <option value="multi-generational">Multi-generational</option>
+                                <option value="roommates">Roommates/Shared</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="kids-present">Children Under 18?</label>
+                            <select id="kids-present" onchange="toggleParentalControls()">
+                                <option value="no">No children</option>
+                                <option value="yes">Yes, enable parental controls</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" id="parental-controls" style="display: none;">
+                        <label>
+                            <input type="checkbox" id="content-filtering" style="width: auto; margin-right: 0.5rem;">
+                            Enable content filtering for children
+                        </label>
+                        <label>
+                            <input type="checkbox" id="usage-limits" style="width: auto; margin-right: 0.5rem;">
+                            Set daily usage limits for children
+                        </label>
+                        <label>
+                            <input type="checkbox" id="educational-mode" style="width: auto; margin-right: 0.5rem;">
+                            Enable educational mode priority
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Payment Preferences -->
+                <div class="form-section">
+                    <h3>💳 Payment Preferences</h3>
+                    <div class="form-group">
+                        <label for="billing-type">Billing Type</label>
+                        <select id="billing-type" onchange="updateBilling()">
+                            <option value="subscription">Monthly Subscription ($99/mo)</option>
+                            <option value="credit">Credit Terms (Net 30)</option>
+                            <option value="annual">Annual Prepay ($990/year - 2 months free)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plan Summary -->
+            <div class="plan-summary">
+                <h3>🏠 Home & Family Plan Summary</h3>
+                <div class="summary-item">
+                    <span>Monthly Service</span>
+                    <span>$99.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Family Members</span>
+                    <span id="member-count">1 member</span>
+                </div>
+                <div class="summary-item">
+                    <span>Family HNS.ID Domain</span>
+                    <span>Included</span>
+                </div>
+                <div class="summary-item">
+                    <span>AI Agents (Shared)</span>
+                    <span>5 agents</span>
+                </div>
+                <div class="summary-item">
+                    <span>Memory Pool</span>
+                    <span>50GB shared</span>
+                </div>
+                <div class="summary-item">
+                    <span>Parental Controls</span>
+                    <span id="parental-status">Not enabled</span>
+                </div>
+                <div class="summary-item">
+                    <span>Total Monthly</span>
+                    <span id="total-cost">$99.00</span>
+                </div>
+            </div>
+
+            <button class="signup-btn" onclick="completeSignup()">
+                Activate Home & Family Plan
+            </button>
+
+            <div style="text-align: center; margin-top: 2rem; color: var(--platinum); font-size: 0.8rem;">
+                Perfect for families, roommates, and shared households. All members get individual privacy with shared benefits.
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let memberCount = 1;
+
+        function connectFamilyWallet() {
+            alert('🏠 Family Wallet Setup\n\nConnecting to CrossMint Family Plan...\n• Shared family wallet\n• Individual member access\n• Parental controls setup\n• Family domain claiming\n• Shared billing management\n\nThis will redirect to CrossMint Family onboarding.');
+        }
+
+        function addFamilyMember() {
+            if (memberCount >= 5) {
+                alert('Maximum 5 family members allowed on Home & Family plan.');
+                return;
+            }
+
+            const container = document.getElementById('family-members-list');
+            const memberDiv = document.createElement('div');
+            memberDiv.className = 'member-item';
+            memberDiv.innerHTML = `
+                <input type="text" placeholder="Family member name">
+                <input type="email" placeholder="email@family.com">
+                <select>
+                    <option>Member</option>
+                    <option>Teen (13-17)</option>
+                    <option>Child (Under 13)</option>
+                    <option>Adult</option>
+                </select>
+                <button class="remove-btn" onclick="removeFamilyMember(this)">×</button>
+            `;
+            container.appendChild(memberDiv);
+            memberCount++;
+            updateMemberCount();
+        }
+
+        function removeFamilyMember(button) {
+            button.parentElement.remove();
+            memberCount--;
+            updateMemberCount();
+        }
+
+        function updateMemberCount() {
+            document.getElementById('member-count').textContent = `${memberCount} member${memberCount !== 1 ? 's' : ''}`;
+        }
+
+        function toggleParentalControls() {
+            const kidsPresent = document.getElementById('kids-present').value;
+            const parentalControls = document.getElementById('parental-controls');
+            const parentalStatus = document.getElementById('parental-status');
+            
+            if (kidsPresent === 'yes') {
+                parentalControls.style.display = 'block';
+                parentalStatus.textContent = 'Enabled';
+            } else {
+                parentalControls.style.display = 'none';
+                parentalStatus.textContent = 'Not enabled';
+            }
+        }
+
+        function updateBilling() {
+            const billingType = document.getElementById('billing-type').value;
+            const totalCost = document.getElementById('total-cost');
+            
+            switch(billingType) {
+                case 'subscription':
+                    totalCost.textContent = '$99.00';
+                    break;
+                case 'credit':
+                    totalCost.textContent = '$99.00 (Net 30)';
+                    break;
+                case 'annual':
+                    totalCost.textContent = '$990.00/year';
+                    break;
+            }
+        }
+
+        function completeSignup() {
+            const holderName = document.getElementById('holder-name').value;
+            const familyDomain = document.getElementById('family-domain').value;
+            const householdType = document.getElementById('household-type').value;
+            
+            if (!holderName || !familyDomain || !householdType) {
+                alert('Please complete all required fields including primary account holder and household information.');
+                return;
+            }
+            
+            alert(`🎉 Welcome to Agentic Web Home & Family!\n\nPrimary: ${holderName}\nFamily: ${memberCount} members\nDomain: ${familyDomain}.hns.id\nType: ${householdType}\nParental Controls: ${document.getElementById('parental-status').textContent}\n\nYour family workspace is being set up with shared AI agents and individual privacy controls.\n\nRedirecting to family dashboard...`);
+        }
+    </script>
+</body>
+</html>

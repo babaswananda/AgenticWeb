@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Configuration | Agentic Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #ffffff;
+            --neural-blue: #00d4ff;
+            --quantum-purple: #8b5cf6;
+            --energy-green: #10b981;
+            --gold: #d4af37;
+            --platinum: #e5e7eb;
+            --dark-bg: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--neural-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links button:hover {
+            color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Main Content */
+        .main {
+            padding: 120px 0 80px 0;
+            min-height: 100vh;
+        }
+
+        .network-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .network-header h1 {
+            font-size: 2.5rem;
+            font-weight: 100;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .network-header p {
+            color: var(--neural-blue);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .config-section {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .config-section h3 {
+            color: var(--neural-blue);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .region-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .region-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .region-option:hover {
+            border-color: var(--neural-blue);
+            transform: translateY(-2px);
+        }
+
+        .region-option.selected {
+            border-color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .region-flag {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .region-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+        }
+
+        .region-latency {
+            font-size: 0.7rem;
+            color: var(--energy-green);
+        }
+
+        .compute-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .compute-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .compute-option:hover {
+            border-color: var(--neural-blue);
+            transform: translateX(5px);
+        }
+
+        .compute-option.selected {
+            border-color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .compute-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .compute-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .compute-tier {
+            font-size: 0.8rem;
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+        }
+
+        .compute-desc {
+            font-size: 0.85rem;
+            color: var(--platinum);
+            margin-bottom: 0.75rem;
+        }
+
+        .compute-specs {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: var(--neural-blue);
+        }
+
+        .runtime-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .control-label {
+            font-size: 0.9rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .slider-container {
+            position: relative;
+        }
+
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--neural-blue);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .slider-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--platinum);
+            margin-top: 0.25rem;
+        }
+
+        .network-status {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .network-status h3 {
+            color: var(--neural-blue);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+        }
+
+        .status-label {
+            font-size: 0.85rem;
+            color: var(--platinum);
+        }
+
+        .status-value {
+            font-size: 0.85rem;
+            color: var(--energy-green);
+            font-weight: 600;
+        }
+
+        .continue-btn {
+            background: linear-gradient(135deg, var(--neural-blue) 0%, var(--quantum-purple) 100%);
+            color: var(--accent);
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Clean Footer */
+        .footer {
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--primary);
+            margin-top: 4rem;
+        }
+
+        .footer p {
+            color: var(--platinum);
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .config-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .region-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav-logo">AGENTIC🌐</a>
+            <div class="nav-links">
+                <button onclick="window.location.href='aiva.html'">AIVA</button>
+                <button onclick="window.location.href='fugio.html'">Fugio</button>
+                <button onclick="window.location.href='vibecoder.html'">VibeCoder</button>
+                <button onclick="window.location.href='enterprise.html'">Enterprise</button>
+                <button onclick="window.location.href='contact.html'">Contact</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="network-header">
+                <h1>🌐 Network Configuration</h1>
+                <p>Configure your AI compute infrastructure and network preferences</p>
+            </div>
+
+            <div class="config-grid">
+                <!-- Region Selection -->
+                <div class="config-section">
+                    <h3>🗺️ Inference Region Selection</h3>
+                    <div class="region-grid">
+                        <div class="region-option" onclick="selectRegion(this, 'us-east')">
+                            <div class="region-flag">🇺🇸</div>
+                            <div class="region-name">US East</div>
+                            <div class="region-latency">12ms</div>
+                        </div>
+                        <div class="region-option" onclick="selectRegion(this, 'us-west')">
+                            <div class="region-flag">🇺🇸</div>
+                            <div class="region-name">US West</div>
+                            <div class="region-latency">8ms</div>
+                        </div>
+                        <div class="region-option" onclick="selectRegion(this, 'eu-central')">
+                            <div class="region-flag">🇪🇺</div>
+                            <div class="region-name">EU Central</div>
+                            <div class="region-latency">15ms</div>
+                        </div>
+                        <div class="region-option" onclick="selectRegion(this, 'asia-pacific')">
+                            <div class="region-flag">🌏</div>
+                            <div class="region-name">Asia Pacific</div>
+                            <div class="region-latency">22ms</div>
+                        </div>
+                        <div class="region-option" onclick="selectRegion(this, 'edge-auto')">
+                            <div class="region-flag">⚡</div>
+                            <div class="region-name">Edge Auto</div>
+                            <div class="region-latency">Auto</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Compute Access -->
+                <div class="config-section">
+                    <h3>🖥️ Compute Access Level</h3>
+                    <div class="compute-options">
+                        <div class="compute-option" onclick="selectCompute(this, 'shared')">
+                            <div class="compute-header">
+                                <div class="compute-name">Shared GPU Pool</div>
+                                <div class="compute-tier">Personal</div>
+                            </div>
+                            <div class="compute-desc">Low-priority access to shared GPU resources</div>
+                            <div class="compute-specs">
+                                <span>• Shared VRAM</span>
+                                <span>• Queue-based</span>
+                                <span>• Basic priority</span>
+                            </div>
+                        </div>
+
+                        <div class="compute-option" onclick="selectCompute(this, 'dedicated')">
+                            <div class="compute-header">
+                                <div class="compute-name">Dedicated Node Pool</div>
+                                <div class="compute-tier">Pro</div>
+                            </div>
+                            <div class="compute-desc">Mid-tier dedicated compute resources</div>
+                            <div class="compute-specs">
+                                <span>• 8GB VRAM</span>
+                                <span>• Reserved access</span>
+                                <span>• High priority</span>
+                            </div>
+                        </div>
+
+                        <div class="compute-option" onclick="selectCompute(this, 'private')">
+                            <div class="compute-header">
+                                <div class="compute-name">Private GPU Pods</div>
+                                <div class="compute-tier">Business</div>
+                            </div>
+                            <div class="compute-desc">Isolated compute pods with hybrid edge</div>
+                            <div class="compute-specs">
+                                <span>• 32GB+ VRAM</span>
+                                <span>• Isolated pods</span>
+                                <span>• Maximum priority</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Runtime Controls -->
+                <div class="config-section">
+                    <h3>⚙️ Runtime Configuration</h3>
+                    <div class="runtime-controls">
+                        <div class="control-group">
+                            <div class="control-label">Latency vs Cost Optimization</div>
+                            <div class="slider-container">
+                                <input type="range" min="0" max="100" value="50" class="slider" id="latency-slider">
+                                <div class="slider-labels">
+                                    <span>Low Cost</span>
+                                    <span>Balanced</span>
+                                    <span>Low Latency</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-label">Resource Allocation Priority</div>
+                            <div class="slider-container">
+                                <input type="range" min="0" max="100" value="75" class="slider" id="resource-slider">
+                                <div class="slider-labels">
+                                    <span>Efficiency</span>
+                                    <span>Balanced</span>
+                                    <span>Performance</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="control-label">Auto-scaling Sensitivity</div>
+                            <div class="slider-container">
+                                <input type="range" min="0" max="100" value="60" class="slider" id="scaling-slider">
+                                <div class="slider-labels">
+                                    <span>Conservative</span>
+                                    <span>Adaptive</span>
+                                    <span>Aggressive</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Network Status -->
+            <div class="network-status">
+                <h3>📊 Network Status & Performance</h3>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span class="status-label">Selected Region</span>
+                        <span class="status-value" id="selected-region">Auto-detect</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Compute Tier</span>
+                        <span class="status-value" id="selected-compute">Not selected</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Estimated Latency</span>
+                        <span class="status-value" id="estimated-latency">--ms</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Network Health</span>
+                        <span class="status-value">Optimal</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Available Nodes</span>
+                        <span class="status-value">247 online</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Queue Position</span>
+                        <span class="status-value">Priority access</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="continue-btn" onclick="proceedToAgentTraining()">
+                Continue to Agent Training
+            </button>
+        </div>
+    </main>
+
+    <!-- Clean Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Agentic Web. Enterprise AI Infrastructure.</p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedRegion = null;
+        let selectedCompute = null;
+
+        function selectRegion(element, region) {
+            document.querySelectorAll('.region-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedRegion = region;
+            
+            const regionNames = {
+                'us-east': 'US East',
+                'us-west': 'US West', 
+                'eu-central': 'EU Central',
+                'asia-pacific': 'Asia Pacific',
+                'edge-auto': 'Edge Auto'
+            };
+            
+            const latencies = {
+                'us-east': '12ms',
+                'us-west': '8ms',
+                'eu-central': '15ms', 
+                'asia-pacific': '22ms',
+                'edge-auto': 'Auto'
+            };
+            
+            document.getElementById('selected-region').textContent = regionNames[region];
+            document.getElementById('estimated-latency').textContent = latencies[region];
+        }
+
+        function selectCompute(element, compute) {
+            document.querySelectorAll('.compute-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedCompute = compute;
+            
+            const computeNames = {
+                'shared': 'Shared GPU',
+                'dedicated': 'Dedicated Pool',
+                'private': 'Private Pods'
+            };
+            
+            document.getElementById('selected-compute').textContent = computeNames[compute];
+        }
+
+        function proceedToAgentTraining() {
+            if (!selectedRegion || !selectedCompute) {
+                alert('Please select both a region and compute tier before continuing.');
+                return;
+            }
+            
+            alert(`🌐 Network Configuration Complete!\n\nRegion: ${document.getElementById('selected-region').textContent}\nCompute: ${document.getElementById('selected-compute').textContent}\nLatency: ${document.getElementById('estimated-latency').textContent}\n\nProceeding to Agent Training...`);
+            window.location.href = 'agent-training.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staking Portal | Agentic Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #ffffff;
+            --neural-blue: #00d4ff;
+            --quantum-purple: #8b5cf6;
+            --energy-green: #10b981;
+            --gold: #d4af37;
+            --platinum: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--neural-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links button:hover {
+            color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .main {
+            padding: 120px 0 80px 0;
+            min-height: 100vh;
+        }
+
+        .staking-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .staking-header h1 {
+            font-size: 2.5rem;
+            font-weight: 100;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .staking-header p {
+            color: var(--gold);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .staking-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .staking-section {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .staking-section h3 {
+            color: var(--gold);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stake-tiers {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .stake-tier {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stake-tier:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .stake-tier.selected {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .tier-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .tier-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .tier-amount {
+            font-size: 1rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .tier-benefits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .benefit-tag {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--gold);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .tier-desc {
+            font-size: 0.85rem;
+            color: var(--platinum);
+        }
+
+        .sla-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .sla-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .sla-option:hover {
+            border-color: var(--neural-blue);
+            transform: translateY(-2px);
+        }
+
+        .sla-option.selected {
+            border-color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .sla-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--neural-blue);
+        }
+
+        .sla-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+        }
+
+        .sla-uptime {
+            font-size: 0.75rem;
+            color: var(--energy-green);
+        }
+
+        .yield-paths {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .yield-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .yield-option:hover {
+            border-color: var(--energy-green);
+        }
+
+        .yield-option.selected {
+            border-color: var(--energy-green);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .yield-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .yield-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .yield-apy {
+            font-size: 1rem;
+            color: var(--energy-green);
+            font-weight: 700;
+        }
+
+        .yield-desc {
+            font-size: 0.85rem;
+            color: var(--platinum);
+        }
+
+        .staking-summary {
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .staking-summary h3 {
+            color: var(--gold);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+        }
+
+        .summary-label {
+            font-size: 0.85rem;
+            color: var(--platinum);
+        }
+
+        .summary-value {
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .activate-btn {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--energy-green) 100%);
+            color: var(--primary);
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .activate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .risk-notice {
+            background: rgba(255, 0, 0, 0.05);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .risk-notice h4 {
+            color: #ff6b6b;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .risk-notice p {
+            color: var(--accent);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .staking-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .sla-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="nav-logo">AGENTIC🌐</a>
+            <div class="nav-links">
+                <button onclick="window.location.href='aiva.html'">AIVA</button>
+                <button onclick="window.location.href='fugio.html'">Fugio</button>
+                <button onclick="window.location.href='vibecoder.html'">VibeCoder</button>
+                <button onclick="window.location.href='enterprise.html'">Enterprise</button>
+                <button onclick="window.location.href='contact.html'">Contact</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="staking-header">
+                <h1>📈 Staking Portal</h1>
+                <p>Stake tokens to activate service levels and unlock yield opportunities</p>
+            </div>
+
+            <div class="staking-grid">
+                <!-- Protocol Commitment Tiers -->
+                <div class="staking-section">
+                    <h3>💰 Select Protocol Commitment Tier</h3>
+                    <form id="staking-form">
+                        <div class="stake-tiers">
+                            <div class="stake-tier" onclick="selectStakeTier(this, 'tier1')">
+                                <div class="tier-header">
+                                    <div class="tier-name">Protocol Tier 1</div>
+                                    <div class="tier-amount">$1,200</div>
+                                </div>
+                                <div class="tier-benefits">
+                                    <span class="benefit-tag">Basic SLA (99.5%)</span>
+                                    <span class="benefit-tag">Priority Queue Only</span>
+                                    <span class="benefit-tag">No Yield</span>
+                                </div>
+                                <div class="tier-desc">Entry-level protocol commitment for enhanced service priority</div>
+                            </div>
+
+                            <div class="stake-tier" onclick="selectStakeTier(this, 'tier2')">
+                                <div class="tier-header">
+                                    <div class="tier-name">Protocol Tier 2</div>
+                                    <div class="tier-amount">$5,000</div>
+                                </div>
+                                <div class="tier-benefits">
+                                    <span class="benefit-tag">Enhanced SLA (99.9%)</span>
+                                    <span class="benefit-tag">8.2% APY Tranche Tokens</span>
+                                    <span class="benefit-tag">Tier 3 Access</span>
+                                </div>
+                                <div class="tier-desc">Professional-grade commitment with yield generation</div>
+                            </div>
+
+                            <div class="stake-tier" onclick="selectStakeTier(this, 'tier3')">
+                                <div class="tier-header">
+                                    <div class="tier-name">Protocol Tier 3</div>
+                                    <div class="tier-amount">$12,000</div>
+                                </div>
+                                <div class="tier-benefits">
+                                    <span class="benefit-tag">Premium SLA (99.99%)</span>
+                                    <span class="benefit-tag">12.7% APY Revenue Share</span>
+                                    <span class="benefit-tag">Tier 1–3 Access</span>
+                                </div>
+                                <div class="tier-desc">Enterprise-level commitment with revenue participation</div>
+                            </div>
+
+                            <div class="stake-tier" onclick="selectStakeTier(this, 'tier4')">
+                                <div class="tier-header">
+                                    <div class="tier-name">Protocol Tier 4 – Mission Critical</div>
+                                    <div class="tier-amount">$50,000+</div>
+                                </div>
+                                <div class="tier-benefits">
+                                    <span class="benefit-tag">SLA 99.999%</span>
+                                    <span class="benefit-tag">Tokenized Equity</span>
+                                    <span class="benefit-tag">Tier 0–3 + SPV Participation</span>
+                                </div>
+                                <div class="tier-desc">Institutional-grade commitment with equity participation</div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- SLA Selection -->
+                <div class="staking-section">
+                    <h3>🛡️ Service Level Agreement</h3>
+                    <div class="sla-options">
+                        <div class="sla-option" onclick="selectSLA(this, 'basic')">
+                            <div class="sla-icon">🔵</div>
+                            <div class="sla-name">Basic</div>
+                            <div class="sla-uptime">99.5% uptime</div>
+                        </div>
+                        <div class="sla-option" onclick="selectSLA(this, 'enhanced')">
+                            <div class="sla-icon">🟡</div>
+                            <div class="sla-name">Enhanced</div>
+                            <div class="sla-uptime">99.9% uptime</div>
+                        </div>
+                        <div class="sla-option" onclick="selectSLA(this, 'premium')">
+                            <div class="sla-icon">🟢</div>
+                            <div class="sla-name">Premium</div>
+                            <div class="sla-uptime">99.99% uptime</div>
+                        </div>
+                        <div class="sla-option" onclick="selectSLA(this, 'mission-critical')">
+                            <div class="sla-icon">🔴</div>
+                            <div class="sla-name">Mission Critical</div>
+                            <div class="sla-uptime">99.999% uptime</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Yield Paths -->
+                <div class="staking-section">
+                    <h3>📊 Yield Opportunities</h3>
+                    <div class="yield-paths">
+                        <div class="yield-option" onclick="selectYield(this, 'none')">
+                            <div class="yield-header">
+                                <div class="yield-name">No Yield</div>
+                                <div class="yield-apy">0% APY</div>
+                            </div>
+                            <div class="yield-desc">Protocol Tier 1 - Priority queue access only</div>
+                        </div>
+
+                        <div class="yield-option" onclick="selectYield(this, 'tranche-tokens')">
+                            <div class="yield-header">
+                                <div class="yield-name">Tranche Tokens</div>
+                                <div class="yield-apy">8.2% APY</div>
+                            </div>
+                            <div class="yield-desc">Protocol Tier 2 - Revenue-backed tokens with quarterly distributions</div>
+                        </div>
+
+                        <div class="yield-option" onclick="selectYield(this, 'revenue-share')">
+                            <div class="yield-header">
+                                <div class="yield-name">Revenue Sharing</div>
+                                <div class="yield-apy">12.7% APY</div>
+                            </div>
+                            <div class="yield-desc">Protocol Tier 3 - Direct participation in platform revenue growth</div>
+                        </div>
+
+                        <div class="yield-option" onclick="selectYield(this, 'tokenized-equity')">
+                            <div class="yield-header">
+                                <div class="yield-name">Tokenized Equity</div>
+                                <div class="yield-apy">15.0% APY</div>
+                            </div>
+                            <div class="yield-desc">Protocol Tier 4 - Equity participation with SPV access</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk Notice -->
+            <div class="risk-notice">
+                <h4>⚠️ STAKING RISK DISCLOSURE</h4>
+                <p>Staking involves financial risk. Staked tokens may be subject to slashing conditions, market volatility, and smart contract risks. Yield rates are variable and not guaranteed. Only stake what you can afford to lose.</p>
+            </div>
+
+            <!-- Staking Summary -->
+            <div class="staking-summary">
+                <h3>📈 Staking Summary</h3>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <span class="summary-label">Stake Amount</span>
+                        <span class="summary-value" id="stake-amount">Not selected</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">SLA Level</span>
+                        <span class="summary-value" id="sla-level">Not selected</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Yield Path</span>
+                        <span class="summary-value" id="yield-path">Not selected</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Expected APY</span>
+                        <span class="summary-value" id="expected-apy">0%</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="activate-btn" onclick="proceedToDashboard()">
+                Activate Staking & Continue
+            </button>
+        </div>
+    </main>
+
+    <script>
+        let selectedStakeTier = null;
+        let selectedSLA = null;
+        let selectedYield = null;
+
+        function selectStakeTier(element, tier) {
+            document.querySelectorAll('.stake-tier').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedStakeTier = tier;
+
+            const tierAmounts = {
+                'tier1': '$1,200',
+                'tier2': '$5,000',
+                'tier3': '$12,000',
+                'tier4': '$50,000+'
+            };
+
+            document.getElementById('stake-amount').textContent = tierAmounts[tier];
+        }
+
+        function selectSLA(element, sla) {
+            document.querySelectorAll('.sla-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedSLA = sla;
+            
+            const slaNames = {
+                'basic': 'Basic (99.5%)',
+                'enhanced': 'Enhanced (99.9%)',
+                'premium': 'Premium (99.99%)',
+                'mission-critical': 'Mission Critical (99.999%)'
+            };
+            
+            document.getElementById('sla-level').textContent = slaNames[sla];
+        }
+
+        function selectYield(element, yieldPath) {
+            document.querySelectorAll('.yield-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedYield = yieldPath;
+            
+            const yieldData = {
+                'none': { name: 'No Yield', apy: '0%' },
+                'tranche-tokens': { name: 'Tranche Tokens', apy: '8.2%' },
+                'revenue-share': { name: 'Revenue Sharing', apy: '12.7%' },
+                'tokenized-equity': { name: 'Tokenized Equity', apy: '15.0%' }
+            };
+            
+            const data = yieldData[yieldPath];
+            document.getElementById('yield-path').textContent = data.name;
+            document.getElementById('expected-apy').textContent = data.apy;
+        }
+
+        function proceedToDashboard() {
+            if (!selectedStakeTier || !selectedSLA) {
+                alert('Please select a staking tier and SLA level before continuing.');
+                return;
+            }
+            
+            const yieldText = selectedYield ? document.getElementById('yield-path').textContent : 'None';
+            const apyText = selectedYield ? document.getElementById('expected-apy').textContent : '0%';
+            
+            alert(`📈 Staking Configuration Complete!\n\nStake: ${document.getElementById('stake-amount').textContent}\nSLA: ${document.getElementById('sla-level').textContent}\nYield: ${yieldText}\nExpected APY: ${apyText}\n\nProceeding to Dashboard...`);
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Solutions | Agentic Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #ffffff;
+            --neural-blue: #00d4ff;
+            --quantum-purple: #8b5cf6;
+            --energy-green: #10b981;
+            --gold: #d4af37;
+            --platinum: #e5e7eb;
+            --dark-bg: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--neural-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links button:hover {
+            color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark-bg) 100%);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 100;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .hero h1 .emoji {
+            font-size: 1em;
+            filter: none;
+            -webkit-text-fill-color: initial;
+        }
+
+        .hero h1 .text {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--neural-blue) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--platinum);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .product-card:hover {
+            border-color: var(--neural-blue);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+        }
+
+        .product-icon {
+            font-size: 3rem;
+            flex-shrink: 0;
+        }
+
+        .product-info {
+            flex: 1;
+        }
+
+        .product-info h3 {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .product-info p {
+            color: var(--neural-blue);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .product-desc {
+            color: var(--platinum);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            font-weight: 300;
+        }
+
+        .product-arrow {
+            font-size: 1.5rem;
+            color: var(--neural-blue);
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .product-arrow {
+            transform: translateX(5px);
+        }
+
+        /* Enterprise Features */
+        .enterprise-features {
+            padding: 80px 0;
+            background: var(--dark-bg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+
+        .feature-text h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            font-weight: 600;
+        }
+
+        .feature-text p {
+            color: var(--platinum);
+            font-size: 0.85rem;
+            font-weight: 300;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            text-align: center;
+            background: var(--primary);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 48px;
+            background: var(--neural-blue);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 0 1rem;
+        }
+
+        .cta-button:hover {
+            background: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--dark-bg);
+        }
+
+        .footer p {
+            color: var(--platinum);
+            font-weight: 300;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 100;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--neural-blue);
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav-logo">AGENTIC🌐</a>
+            <div class="nav-links">
+                <button onclick="window.location.href='aiva.html'">AIVA</button>
+                <button onclick="window.location.href='fugio.html'">Fugio</button>
+                <button onclick="window.location.href='vibecoder.html'">VibeCoder</button>
+                <button onclick="window.location.href='enterprise.html'">Enterprise</button>
+                <button onclick="window.location.href='contact.html'">Contact</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Enterprise Solutions</h1>
+            <p>Advanced AI infrastructure for enterprise environments</p>
+        </div>
+    </section>
+
+    <!-- Product Grid -->
+    <section style="padding: 80px 0; background: var(--dark-bg);">
+        <div class="container">
+            <h2 class="section-title">Enterprise AI Platform</h2>
+            <p class="section-subtitle">Comprehensive solutions for large-scale deployments</p>
+            
+            <div class="product-grid">
+                <div class="product-card" onclick="window.location.href='aiva.html'">
+                    <div class="product-icon">🧠</div>
+                    <div class="product-info">
+                        <h3>AIVA Enterprise</h3>
+                        <p>Neural Voice Interface</p>
+                        <div class="product-desc">Enterprise-grade AI assistant with advanced natural language processing and voice recognition capabilities.</div>
+                    </div>
+                    <div class="product-arrow">→</div>
+                </div>
+
+                <div class="product-card" onclick="window.location.href='fugio.html'">
+                    <div class="product-icon">🪙</div>
+                    <div class="product-info">
+                        <h3>Fugio Protocol</h3>
+                        <p>Quantum Economics Engine</p>
+                        <div class="product-desc">Decentralized economic infrastructure with quantum-resistant cryptography and instant settlements.</div>
+                    </div>
+                    <div class="product-arrow">→</div>
+                </div>
+
+                <div class="product-card" onclick="window.location.href='vibecoder.html'">
+                    <div class="product-icon">💻</div>
+                    <div class="product-info">
+                        <h3>VibeCoder Enterprise</h3>
+                        <p>Neural Development Suite</p>
+                        <div class="product-desc">AI-powered integrated development environment with intelligent code generation and collaboration tools.</div>
+                    </div>
+                    <div class="product-arrow">→</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enterprise Features -->
+    <section class="enterprise-features">
+        <div class="container">
+            <h2 class="section-title">Enterprise Features</h2>
+            <p class="section-subtitle">Built for scale, security, and performance</p>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-text">
+                        <h4>Enterprise Security</h4>
+                        <p>SOC 2, GDPR, and HIPAA compliant with end-to-end encryption</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-text">
+                        <h4>High Performance</h4>
+                        <p>99.99% uptime SLA with global infrastructure and edge computing</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">🔗</div>
+                    <div class="feature-text">
+                        <h4>API Integration</h4>
+                        <p>RESTful and GraphQL APIs for seamless system integration</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-text">
+                        <h4>Analytics Dashboard</h4>
+                        <p>Real-time monitoring, metrics, and business intelligence</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">🏢</div>
+                    <div class="feature-text">
+                        <h4>Custom Deployment</h4>
+                        <p>On-premise, cloud, or hybrid deployment options</p>
+                    </div>
+                </div>
+
+                <div class="feature-item">
+                    <div class="feature-icon">🛠️</div>
+                    <div class="feature-text">
+                        <h4>Professional Services</h4>
+                        <p>Implementation, training, and ongoing technical support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2 class="section-title">Ready for Enterprise AI?</h2>
+            <p style="font-size: 1.2rem; color: var(--platinum); margin-bottom: 2rem;">
+                Transform your organization with advanced AI infrastructure
+            </p>
+            <a href="contact.html" class="cta-button">Request Enterprise Demo</a>
+            <a href="contact.html" class="cta-button secondary">Contact Sales Team</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Agentic Web. All rights reserved. Enterprise AI Infrastructure.</p>
+        </div>
+    </footer>
+</body>
+</html>

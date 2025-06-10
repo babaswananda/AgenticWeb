@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Setup | Agentic Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #ffffff;
+            --neural-blue: #00d4ff;
+            --quantum-purple: #8b5cf6;
+            --energy-green: #10b981;
+            --gold: #d4af37;
+            --platinum: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--neural-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links button:hover {
+            color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .main {
+            padding: 120px 0 80px 0;
+            min-height: 100vh;
+        }
+
+        .setup-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .setup-header h1 {
+            font-size: 2.5rem;
+            font-weight: 100;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .setup-header p {
+            color: var(--neural-blue);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .setup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .setup-section {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .setup-section h3 {
+            color: var(--neural-blue);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .plan-selector {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .plan-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .plan-option:hover {
+            border-color: var(--neural-blue);
+            transform: translateY(-2px);
+        }
+
+        .plan-option.selected {
+            border-color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .plan-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+        }
+
+        .plan-price {
+            font-size: 0.7rem;
+            color: var(--energy-green);
+        }
+
+        .team-management {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .team-member {
+            display: grid;
+            grid-template-columns: 2fr 1fr auto;
+            gap: 1rem;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .team-member input {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 0.5rem;
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .team-member select {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 0.5rem;
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .remove-member {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff6b6b;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .remove-member:hover {
+            background: rgba(255, 0, 0, 0.3);
+        }
+
+        .add-member-btn {
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid var(--neural-blue);
+            color: var(--neural-blue);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .add-member-btn:hover {
+            background: var(--neural-blue);
+            color: var(--accent);
+        }
+
+        .workspace-config {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .workspace-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .workspace-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .workspace-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .workspace-type {
+            font-size: 0.8rem;
+            color: var(--energy-green);
+            background: rgba(16, 185, 129, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+        }
+
+        .workspace-desc {
+            font-size: 0.85rem;
+            color: var(--platinum);
+        }
+
+        .add-workspace-btn {
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid var(--quantum-purple);
+            color: var(--quantum-purple);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .add-workspace-btn:hover {
+            background: var(--quantum-purple);
+            color: var(--accent);
+        }
+
+        .setup-status {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .setup-status h3 {
+            color: var(--neural-blue);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+        }
+
+        .status-label {
+            font-size: 0.85rem;
+            color: var(--platinum);
+        }
+
+        .status-value {
+            font-size: 0.85rem;
+            color: var(--energy-green);
+            font-weight: 600;
+        }
+
+        .continue-btn {
+            background: linear-gradient(135deg, var(--neural-blue) 0%, var(--quantum-purple) 100%);
+            color: var(--accent);
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .setup-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .plan-selector {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .team-member {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="nav-logo">AGENTIC🌐</a>
+            <div class="nav-links">
+                <button onclick="window.location.href='aiva.html'">AIVA</button>
+                <button onclick="window.location.href='fugio.html'">Fugio</button>
+                <button onclick="window.location.href='vibecoder.html'">VibeCoder</button>
+                <button onclick="window.location.href='enterprise.html'">Enterprise</button>
+                <button onclick="window.location.href='contact.html'">Contact</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="setup-header">
+                <h1>👥 Account Setup</h1>
+                <p>Configure your plan, team members, and workspaces</p>
+            </div>
+
+            <div class="setup-grid">
+                <!-- Plan Selection -->
+                <div class="setup-section">
+                    <h3>📋 Select Your Plan</h3>
+                    <div class="plan-selector">
+                        <div class="plan-option" onclick="selectPlan(this, 'personal')">
+                            <div class="plan-icon">👤</div>
+                            <div class="plan-name">Personal</div>
+                            <div class="plan-price">$9/mo</div>
+                        </div>
+                        <div class="plan-option" onclick="selectPlan(this, 'pro')">
+                            <div class="plan-icon">⚡</div>
+                            <div class="plan-name">Pro</div>
+                            <div class="plan-price">$49/mo</div>
+                        </div>
+                        <div class="plan-option" onclick="selectPlan(this, 'business')">
+                            <div class="plan-icon">🏢</div>
+                            <div class="plan-name">Business</div>
+                            <div class="plan-price">Custom</div>
+                        </div>
+                        <div class="plan-option" onclick="selectPlan(this, 'education')">
+                            <div class="plan-icon">🎓</div>
+                            <div class="plan-name">Education</div>
+                            <div class="plan-price">50% off</div>
+                        </div>
+                        <div class="plan-option" onclick="selectPlan(this, 'government')">
+                            <div class="plan-icon">🏛️</div>
+                            <div class="plan-name">Government</div>
+                            <div class="plan-price">GSA</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Management -->
+                <div class="setup-section">
+                    <h3>👥 Add Team Members</h3>
+                    <div class="team-management" id="team-management">
+                        <div class="team-member">
+                            <input type="email" placeholder="team@company.com">
+                            <select>
+                                <option>Admin</option>
+                                <option>Editor</option>
+                                <option>Viewer</option>
+                            </select>
+                            <button class="remove-member" onclick="removeMember(this)">×</button>
+                        </div>
+                    </div>
+                    <button class="add-member-btn" onclick="addMember()">+ Add Team Member</button>
+                </div>
+
+                <!-- Workspace Configuration -->
+                <div class="setup-section">
+                    <h3>🏗️ Configure Workspaces</h3>
+                    <div class="workspace-config" id="workspace-config">
+                        <div class="workspace-item">
+                            <div class="workspace-header">
+                                <div class="workspace-name">Default Workspace</div>
+                                <div class="workspace-type">Personal</div>
+                            </div>
+                            <div class="workspace-desc">Your main workspace for AI agents and projects</div>
+                        </div>
+                    </div>
+                    <button class="add-workspace-btn" onclick="addWorkspace()">+ Add Workspace</button>
+                </div>
+            </div>
+
+            <!-- Setup Status -->
+            <div class="setup-status">
+                <h3>📊 Account Configuration Status</h3>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span class="status-label">Selected Plan</span>
+                        <span class="status-value" id="selected-plan">Not selected</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Team Members</span>
+                        <span class="status-value" id="team-count">1 member</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Workspaces</span>
+                        <span class="status-value" id="workspace-count">1 workspace</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Setup Status</span>
+                        <span class="status-value">Ready to proceed</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="continue-btn" onclick="proceedToStaking()">
+                Continue to Staking Portal
+            </button>
+        </div>
+    </main>
+
+    <!-- Clean Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Agentic Web. Enterprise AI Infrastructure.</p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedPlan = null;
+        let teamCount = 1;
+        let workspaceCount = 1;
+
+        function selectPlan(element, plan) {
+            document.querySelectorAll('.plan-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedPlan = plan;
+            
+            const planNames = {
+                'personal': 'Personal ($9/mo)',
+                'pro': 'Pro ($49/mo)',
+                'business': 'Business (Custom)',
+                'education': 'Education (50% off)',
+                'government': 'Government (GSA)'
+            };
+            
+            document.getElementById('selected-plan').textContent = planNames[plan];
+        }
+
+        function addMember() {
+            const container = document.getElementById('team-management');
+            const memberDiv = document.createElement('div');
+            memberDiv.className = 'team-member';
+            memberDiv.innerHTML = `
+                <input type="email" placeholder="member@company.com">
+                <select>
+                    <option>Editor</option>
+                    <option>Admin</option>
+                    <option>Viewer</option>
+                </select>
+                <button class="remove-member" onclick="removeMember(this)">×</button>
+            `;
+            container.appendChild(memberDiv);
+            teamCount++;
+            updateTeamCount();
+        }
+
+        function removeMember(button) {
+            button.parentElement.remove();
+            teamCount--;
+            updateTeamCount();
+        }
+
+        function updateTeamCount() {
+            document.getElementById('team-count').textContent = `${teamCount} member${teamCount !== 1 ? 's' : ''}`;
+        }
+
+        function addWorkspace() {
+            const container = document.getElementById('workspace-config');
+            const workspaceDiv = document.createElement('div');
+            workspaceDiv.className = 'workspace-item';
+            workspaceDiv.innerHTML = `
+                <div class="workspace-header">
+                    <div class="workspace-name">Project Workspace ${workspaceCount}</div>
+                    <div class="workspace-type">Shared</div>
+                </div>
+                <div class="workspace-desc">Collaborative workspace for team projects</div>
+            `;
+            container.appendChild(workspaceDiv);
+            workspaceCount++;
+            updateWorkspaceCount();
+        }
+
+        function updateWorkspaceCount() {
+            document.getElementById('workspace-count').textContent = `${workspaceCount} workspace${workspaceCount !== 1 ? 's' : ''}`;
+        }
+
+        function proceedToStaking() {
+            if (!selectedPlan) {
+                alert('Please select a plan before continuing.');
+                return;
+            }
+            
+            alert(`👥 Account Setup Complete!\n\nPlan: ${document.getElementById('selected-plan').textContent}\nTeam: ${teamCount} members\nWorkspaces: ${workspaceCount}\n\nProceeding to Staking Portal...`);
+            window.location.href = 'staking-portal.html';
+        }
+    </script>
+</body>
+</html>

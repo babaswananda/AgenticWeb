@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Web Desktop</title>
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #FFFFFF;
+            --neural-blue: #00D4FF;
+            --quantum-purple: #8B5CF6;
+            --energy-green: #10B981;
+            --gold: #D4AF37;
+            --platinum: #E5E7EB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, #111  100%);
+            color: var(--accent);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Desktop-specific styles */
+        .desktop-app {
+            -webkit-app-region: drag;
+        }
+
+        .desktop-app * {
+            -webkit-app-region: no-drag;
+        }
+
+        /* Offline indicator */
+        .offline-indicator {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background: #ff4444;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            z-index: 1000;
+            display: none;
+        }
+
+        .offline .offline-indicator {
+            display: block;
+        }
+
+        /* Main container */
+        .app-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .app-header {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            -webkit-app-region: drag;
+        }
+
+        .app-header * {
+            -webkit-app-region: no-drag;
+        }
+
+        .app-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .app-logo .icon {
+            font-size: 24px;
+        }
+
+        .app-logo .text {
+            font-size: 18px;
+            font-weight: 300;
+        }
+
+        .app-controls {
+            display: flex;
+            gap: 12px;
+        }
+
+        .control-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 8px 16px;
+            color: var(--accent);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main content */
+        .main-content {
+            flex: 1;
+            position: relative;
+        }
+
+        /* Chat Stream Container */
+        .chat-stream-container {
+            height: calc(100vh - 80px);
+            overflow-y: auto;
+        }
+
+        /* Welcome screen */
+        .welcome-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .welcome-icon {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            font-weight: 100;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--neural-blue) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            color: var(--neural-blue);
+            margin-bottom: 3rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, var(--neural-blue) 0%, var(--quantum-purple) 100%);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        .action-btn.secondary {
+            background: transparent;
+            border: 1px solid var(--neural-blue);
+            color: var(--neural-blue);
+        }
+
+        .action-btn.secondary:hover {
+            background: var(--neural-blue);
+            color: var(--primary);
+        }
+
+        /* Status bar */
+        .status-bar {
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--platinum);
+        }
+
+        .status-left {
+            display: flex;
+            gap: 16px;
+        }
+
+        .status-right {
+            display: flex;
+            gap: 16px;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--energy-green);
+        }
+
+        .status-dot.offline {
+            background: #ff4444;
+        }
+
+        /* Loading animation */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid var(--neural-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-indicator">
+        🔴 Offline Mode - Limited functionality
+    </div>
+
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="app-logo">
+                <span class="icon">🚀</span>
+                <span class="text">Agentic Web</span>
+            </div>
+            <div class="app-controls">
+                <button class="control-btn" id="initProtocolBtn">
+                    ⚡ Initialize Protocol
+                </button>
+                <button class="control-btn" id="parseWebsiteBtn">
+                    🌐 Parse Website
+                </button>
+                <button class="control-btn" id="settingsBtn">
+                    ⚙️ Settings
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="chat-stream-container" id="chatStreamContainer">
+                <!-- Welcome Screen -->
+                <div class="welcome-screen" id="welcomeScreen">
+                    <div class="welcome-icon">🌐</div>
+                    <h1 class="welcome-title">Welcome to Agentic Web Desktop</h1>
+                    <p class="welcome-subtitle">Protocol-native AI infrastructure for the new internet</p>
+                    
+                    <div class="action-buttons">
+                        <button class="action-btn" id="startDemoBtn">
+                            <span>🚀</span>
+                            <span>Start Demo</span>
+                        </button>
+                        <button class="action-btn secondary" id="parseUrlBtn">
+                            <span>📄</span>
+                            <span>Parse Website</span>
+                        </button>
+                        <button class="action-btn secondary" id="offlineModeBtn">
+                            <span>💾</span>
+                            <span>Offline Mode</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Loading Screen -->
+                <div class="loading" id="loadingScreen" style="display: none;">
+                    <div class="loading-spinner"></div>
+                </div>
+
+                <!-- Chat Stream will be injected here -->
+                <div id="chatStreamContent" style="display: none;"></div>
+            </div>
+        </main>
+
+        <!-- Status Bar -->
+        <footer class="status-bar">
+            <div class="status-left">
+                <div class="status-indicator">
+                    <div class="status-dot" id="connectionStatus"></div>
+                    <span id="connectionText">Connected</span>
+                </div>
+                <div class="status-indicator">
+                    <span>Protocol: </span>
+                    <span id="protocolStatus">Ready</span>
+                </div>
+            </div>
+            <div class="status-right">
+                <div class="status-indicator">
+                    <span id="versionInfo">v1.0.0</span>
+                </div>
+                <div class="status-indicator">
+                    <a href="https://get.poweredbyai" style="color: var(--neural-blue); text-decoration: none;">
+                        🤖 get.poweredbyai
+                    </a>
+                </div>
+                <div class="status-indicator">
+                    <a href="https://agi.unifiedai" style="color: var(--neural-blue); text-decoration: none;">
+                        🧠 agi.unifiedai
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>

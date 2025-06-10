@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Training | Agentic Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #ffffff;
+            --neural-blue: #00d4ff;
+            --quantum-purple: #8b5cf6;
+            --energy-green: #10b981;
+            --gold: #d4af37;
+            --platinum: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--neural-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links button:hover {
+            color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .main {
+            padding: 120px 0 80px 0;
+            min-height: 100vh;
+        }
+
+        .training-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .training-header h1 {
+            font-size: 2.5rem;
+            font-weight: 100;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .training-header p {
+            color: var(--neural-blue);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .training-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .training-section {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .training-section h3 {
+            color: var(--neural-blue);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .agent-roles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .role-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .role-option:hover {
+            border-color: var(--neural-blue);
+            transform: translateY(-2px);
+        }
+
+        .role-option.selected {
+            border-color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .role-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .role-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .upload-area:hover {
+            border-color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .upload-area.dragover {
+            border-color: var(--energy-green);
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .upload-icon {
+            font-size: 2rem;
+            color: var(--neural-blue);
+            margin-bottom: 1rem;
+        }
+
+        .file-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.75rem;
+            border-radius: 6px;
+        }
+
+        .file-name {
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        .file-size {
+            font-size: 0.75rem;
+            color: var(--platinum);
+        }
+
+        .remove-file {
+            background: rgba(255, 0, 0, 0.2);
+            border: none;
+            color: #ff6b6b;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.75rem;
+        }
+
+        .memory-config {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .memory-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .memory-option:hover {
+            border-color: var(--neural-blue);
+        }
+
+        .memory-option.selected {
+            border-color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .memory-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .memory-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .memory-size {
+            font-size: 0.8rem;
+            color: var(--energy-green);
+            background: rgba(16, 185, 129, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+        }
+
+        .memory-desc {
+            font-size: 0.85rem;
+            color: var(--platinum);
+        }
+
+        .training-status {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .training-status h3 {
+            color: var(--neural-blue);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+        }
+
+        .status-label {
+            font-size: 0.85rem;
+            color: var(--platinum);
+        }
+
+        .status-value {
+            font-size: 0.85rem;
+            color: var(--energy-green);
+            font-weight: 600;
+        }
+
+        .continue-btn {
+            background: linear-gradient(135deg, var(--neural-blue) 0%, var(--quantum-purple) 100%);
+            color: var(--accent);
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        /* Clean Footer */
+        .footer {
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--primary);
+            margin-top: 4rem;
+        }
+
+        .footer p {
+            color: var(--platinum);
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .training-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .agent-roles {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav-logo">AGENTIC🌐</a>
+            <div class="nav-links">
+                <button onclick="window.location.href='aiva.html'">AIVA</button>
+                <button onclick="window.location.href='fugio.html'">Fugio</button>
+                <button onclick="window.location.href='vibecoder.html'">VibeCoder</button>
+                <button onclick="window.location.href='enterprise.html'">Enterprise</button>
+                <button onclick="window.location.href='contact.html'">Contact</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="training-header">
+                <h1>🤖 Agent Training & Configuration</h1>
+                <p>Configure your AI agents with custom roles, brand protocols, and memory layers</p>
+            </div>
+
+            <div class="training-grid">
+                <!-- Agent Roles -->
+                <div class="training-section">
+                    <h3>👥 Assign Agent Roles</h3>
+                    <div class="agent-roles">
+                        <div class="role-option" onclick="selectRole(this, 'support')">
+                            <div class="role-icon">🎧</div>
+                            <div class="role-name">Support</div>
+                        </div>
+                        <div class="role-option" onclick="selectRole(this, 'devops')">
+                            <div class="role-icon">⚙️</div>
+                            <div class="role-name">DevOps</div>
+                        </div>
+                        <div class="role-option" onclick="selectRole(this, 'pm')">
+                            <div class="role-icon">📋</div>
+                            <div class="role-name">PM</div>
+                        </div>
+                        <div class="role-option" onclick="selectRole(this, 'copywriter')">
+                            <div class="role-icon">✍️</div>
+                            <div class="role-name">Copywriter</div>
+                        </div>
+                        <div class="role-option" onclick="selectRole(this, 'analyst')">
+                            <div class="role-icon">📊</div>
+                            <div class="role-name">Analyst</div>
+                        </div>
+                        <div class="role-option" onclick="selectRole(this, 'researcher')">
+                            <div class="role-icon">🔬</div>
+                            <div class="role-name">Researcher</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Brand Protocols -->
+                <div class="training-section">
+                    <h3>📄 Upload Brand Protocols</h3>
+                    <div class="upload-area" onclick="document.getElementById('file-input').click()" ondrop="handleDrop(event)" ondragover="handleDragOver(event)">
+                        <div class="upload-icon">📁</div>
+                        <p>Drop files here or click to upload</p>
+                        <p style="font-size: 0.8rem; color: var(--platinum); margin-top: 0.5rem;">
+                            Supported: PDF, JSON, TXT, MD (Max 10MB each)
+                        </p>
+                    </div>
+                    <input type="file" id="file-input" multiple accept=".pdf,.json,.txt,.md" style="display: none;" onchange="handleFiles(this.files)">
+                    <div class="file-list" id="file-list"></div>
+                </div>
+
+                <!-- Memory Layer -->
+                <div class="training-section">
+                    <h3>🧠 Initialize AI Memory Layer</h3>
+                    <div class="memory-config">
+                        <div class="memory-option" onclick="selectMemory(this, 'basic')">
+                            <div class="memory-header">
+                                <div class="memory-name">Basic Memory</div>
+                                <div class="memory-size">2GB</div>
+                            </div>
+                            <div class="memory-desc">Standard vector storage for personal use</div>
+                        </div>
+                        <div class="memory-option" onclick="selectMemory(this, 'enhanced')">
+                            <div class="memory-header">
+                                <div class="memory-name">Enhanced Memory</div>
+                                <div class="memory-size">10GB</div>
+                            </div>
+                            <div class="memory-desc">Shared memory pool for team collaboration</div>
+                        </div>
+                        <div class="memory-option" onclick="selectMemory(this, 'enterprise')">
+                            <div class="memory-header">
+                                <div class="memory-name">Enterprise Memory</div>
+                                <div class="memory-size">500GB+</div>
+                            </div>
+                            <div class="memory-desc">Massive vector database for enterprise AI</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Training Status -->
+            <div class="training-status">
+                <h3>🚀 Training Status & Configuration</h3>
+                <div class="status-grid">
+                    <div class="status-item">
+                        <span class="status-label">Selected Role</span>
+                        <span class="status-value" id="selected-role">Not selected</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Uploaded Files</span>
+                        <span class="status-value" id="file-count">0 files</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Memory Layer</span>
+                        <span class="status-value" id="selected-memory">Not configured</span>
+                    </div>
+                    <div class="status-item">
+                        <span class="status-label">Training Status</span>
+                        <span class="status-value">Ready to initialize</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="continue-btn" onclick="proceedToAccountSetup()">
+                Continue to Account Setup
+            </button>
+        </div>
+    </main>
+
+    <!-- Clean Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Agentic Web. Enterprise AI Infrastructure.</p>
+        </div>
+    </footer>
+
+    <script>
+        let selectedRole = null;
+        let selectedMemory = null;
+        let uploadedFiles = [];
+
+        function selectRole(element, role) {
+            document.querySelectorAll('.role-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedRole = role;
+            
+            const roleNames = {
+                'support': 'Support Agent',
+                'devops': 'DevOps Agent',
+                'pm': 'Project Manager',
+                'copywriter': 'Copywriter',
+                'analyst': 'Data Analyst',
+                'researcher': 'Researcher'
+            };
+            
+            document.getElementById('selected-role').textContent = roleNames[role];
+        }
+
+        function selectMemory(element, memory) {
+            document.querySelectorAll('.memory-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedMemory = memory;
+            
+            const memoryNames = {
+                'basic': 'Basic Memory (2GB)',
+                'enhanced': 'Enhanced Memory (10GB)',
+                'enterprise': 'Enterprise Memory (500GB+)'
+            };
+            
+            document.getElementById('selected-memory').textContent = memoryNames[memory];
+        }
+
+        function handleDragOver(event) {
+            event.preventDefault();
+            event.currentTarget.classList.add('dragover');
+        }
+
+        function handleDrop(event) {
+            event.preventDefault();
+            event.currentTarget.classList.remove('dragover');
+            const files = event.dataTransfer.files;
+            handleFiles(files);
+        }
+
+        function handleFiles(files) {
+            for (let file of files) {
+                if (file.size > 10 * 1024 * 1024) {
+                    alert(`File ${file.name} is too large. Maximum size is 10MB.`);
+                    continue;
+                }
+                
+                uploadedFiles.push(file);
+                addFileToList(file);
+            }
+            updateFileCount();
+        }
+
+        function addFileToList(file) {
+            const fileList = document.getElementById('file-list');
+            const fileItem = document.createElement('div');
+            fileItem.className = 'file-item';
+            fileItem.innerHTML = `
+                <div>
+                    <div class="file-name">${file.name}</div>
+                    <div class="file-size">${(file.size / 1024 / 1024).toFixed(2)} MB</div>
+                </div>
+                <button class="remove-file" onclick="removeFile('${file.name}', this)">Remove</button>
+            `;
+            fileList.appendChild(fileItem);
+        }
+
+        function removeFile(fileName, button) {
+            uploadedFiles = uploadedFiles.filter(file => file.name !== fileName);
+            button.parentElement.remove();
+            updateFileCount();
+        }
+
+        function updateFileCount() {
+            document.getElementById('file-count').textContent = `${uploadedFiles.length} files`;
+        }
+
+        function proceedToAccountSetup() {
+            if (!selectedRole || !selectedMemory) {
+                alert('Please select an agent role and memory configuration before continuing.');
+                return;
+            }
+            
+            alert(`🤖 Agent Training Configuration Complete!\n\nRole: ${document.getElementById('selected-role').textContent}\nMemory: ${document.getElementById('selected-memory').textContent}\nFiles: ${uploadedFiles.length} uploaded\n\nProceeding to Account Setup...`);
+            window.location.href = 'account-setup.html';
+        }
+    </script>
+</body>
+</html>

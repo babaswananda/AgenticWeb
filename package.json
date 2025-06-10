@@ -1,0 +1,68 @@
+{
+  "name": "@agentic-web/chat-stream-engine",
+  "version": "1.0.0",
+  "description": "Conversational Scroll Engine for the Agentic Web - Transform any website into an interactive, chat-style experience",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "jest",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "agentic-web",
+    "chat-stream",
+    "conversational-ui",
+    "scroll-engine",
+    "react",
+    "framer-motion",
+    "ai",
+    "protocol-native",
+    "web3",
+    "crypto"
+  ],
+  "author": "Agentic Web Protocol",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agentic-web/chat-stream-engine.git"
+  },
+  "homepage": "https://agenticweb.com",
+  "bugs": {
+    "url": "https://github.com/agentic-web/chat-stream-engine/issues"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0",
+    "framer-motion": ">=6.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@rollup/plugin-commonjs": "^25.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "eslint": "^8.0.0",
+    "eslint-plugin-react": "^7.0.0",
+    "eslint-plugin-react-hooks": "^4.0.0",
+    "jest": "^29.0.0",
+    "rollup": "^3.0.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "clsx": "^2.0.0"
+  }
+}

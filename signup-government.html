@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Plan Signup | Agentic Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #ffffff;
+            --neural-blue: #00d4ff;
+            --quantum-purple: #8b5cf6;
+            --energy-green: #10b981;
+            --gold: #d4af37;
+            --platinum: #e5e7eb;
+            --dark-bg: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--neural-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links button:hover {
+            color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Main Content */
+        .main {
+            padding: 120px 0 80px 0;
+            min-height: 100vh;
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .signup-header h1 {
+            font-size: 2.5rem;
+            font-weight: 100;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .government-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--quantum-purple) 0%, var(--gold) 100%);
+            color: var(--accent);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .signup-header p {
+            color: var(--quantum-purple);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .compliance-banner {
+            background: rgba(139, 92, 246, 0.1);
+            border: 2px solid var(--quantum-purple);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .compliance-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .compliance-badge {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--quantum-purple);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--quantum-purple);
+        }
+
+        .signup-form {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .form-section h3 {
+            color: var(--quantum-purple);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--accent);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--quantum-purple);
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+        }
+
+        .deployment-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .deployment-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .deployment-option:hover {
+            border-color: var(--quantum-purple);
+            transform: translateY(-2px);
+        }
+
+        .deployment-option.selected {
+            border-color: var(--quantum-purple);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .deployment-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .deployment-desc {
+            font-size: 0.85rem;
+            color: var(--platinum);
+            margin-bottom: 0.75rem;
+        }
+
+        .deployment-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--quantum-purple);
+        }
+
+        .clearance-levels {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .clearance-level {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .clearance-level:hover {
+            border-color: var(--quantum-purple);
+            transform: translateY(-2px);
+        }
+
+        .clearance-level.selected {
+            border-color: var(--quantum-purple);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .wallet-connect {
+            background: linear-gradient(135deg, var(--quantum-purple) 0%, var(--gold) 100%);
+            color: var(--accent);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .wallet-connect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .plan-summary {
+            background: rgba(139, 92, 246, 0.05);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .plan-summary h3 {
+            color: var(--quantum-purple);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            color: var(--quantum-purple);
+        }
+
+        .signup-btn {
+            background: linear-gradient(135deg, var(--quantum-purple) 0%, var(--gold) 100%);
+            color: var(--accent);
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .security-notice {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .security-notice h4 {
+            color: var(--gold);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .security-notice p {
+            color: var(--accent);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .signup-form {
+                padding: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .deployment-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .compliance-badges {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="nav-logo">AGENTIC🌐</a>
+            <div class="nav-links">
+                <button onclick="window.location.href='aiva.html'">AIVA</button>
+                <button onclick="window.location.href='fugio.html'">Fugio</button>
+                <button onclick="window.location.href='vibecoder.html'">VibeCoder</button>
+                <button onclick="window.location.href='enterprise.html'">Enterprise</button>
+                <button onclick="window.location.href='contact.html'">Contact</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="signup-header">
+                <div class="government-badge">🏛️ GOVERNMENT PLAN</div>
+                <h1>Government Plan Signup</h1>
+                <p>Sovereign AI infrastructure with air-gapped deployment and FedRAMP compliance</p>
+            </div>
+
+            <!-- Compliance Banner -->
+            <div class="compliance-banner">
+                <div class="compliance-badges">
+                    <div class="compliance-badge">FedRAMP Authorized</div>
+                    <div class="compliance-badge">FISMA Compliant</div>
+                    <div class="compliance-badge">GSA Schedule Ready</div>
+                    <div class="compliance-badge">IL-4 Certified</div>
+                </div>
+                <h3>Highest Security Standards for Government Operations</h3>
+                <p>Air-gapped deployment options with sovereign cloud infrastructure</p>
+            </div>
+
+            <div class="signup-form">
+                <!-- Agency Information -->
+                <div class="form-section">
+                    <h3>🏛️ Agency Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="agency-name">Agency/Department Name</label>
+                            <input type="text" id="agency-name" placeholder="Department of Technology" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="agency-level">Government Level</label>
+                            <select id="agency-level" required>
+                                <option value="">Select level</option>
+                                <option value="federal">Federal</option>
+                                <option value="state">State</option>
+                                <option value="local">Local/Municipal</option>
+                                <option value="military">Military</option>
+                                <option value="intelligence">Intelligence</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cage-code">CAGE Code</label>
+                            <input type="text" id="cage-code" placeholder="12345" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="duns-number">DUNS Number</label>
+                            <input type="text" id="duns-number" placeholder="123456789" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Deployment Configuration -->
+                <div class="form-section">
+                    <h3>🔒 Deployment Configuration</h3>
+                    <div class="deployment-options">
+                        <div class="deployment-option" onclick="selectDeployment(this, 'fedramp-cloud')">
+                            <div class="deployment-name">FedRAMP Cloud</div>
+                            <div class="deployment-desc">Authorized cloud infrastructure with continuous monitoring</div>
+                            <div class="deployment-features">
+                                <span>• FedRAMP High</span>
+                                <span>• FISMA Compliant</span>
+                                <span>• 24/7 SOC</span>
+                            </div>
+                        </div>
+
+                        <div class="deployment-option" onclick="selectDeployment(this, 'govcloud')">
+                            <div class="deployment-name">AWS GovCloud</div>
+                            <div class="deployment-desc">Isolated cloud regions for sensitive workloads</div>
+                            <div class="deployment-features">
+                                <span>• IL-4 Certified</span>
+                                <span>• ITAR Compliant</span>
+                                <span>• US Persons Only</span>
+                            </div>
+                        </div>
+
+                        <div class="deployment-option" onclick="selectDeployment(this, 'air-gapped')">
+                            <div class="deployment-name">Air-Gapped</div>
+                            <div class="deployment-desc">Completely isolated infrastructure with no external connectivity</div>
+                            <div class="deployment-features">
+                                <span>• Zero Network</span>
+                                <span>• Physical Security</span>
+                                <span>• Custom Hardware</span>
+                            </div>
+                        </div>
+
+                        <div class="deployment-option" onclick="selectDeployment(this, 'hybrid')">
+                            <div class="deployment-name">Hybrid Sovereign</div>
+                            <div class="deployment-desc">Combination of cloud and on-premise with secure connectivity</div>
+                            <div class="deployment-features">
+                                <span>• Secure Tunnels</span>
+                                <span>• Data Sovereignty</span>
+                                <span>• Flexible Scaling</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Clearance -->
+                <div class="form-section">
+                    <h3>🛡️ Security Clearance Requirements</h3>
+                    <div class="clearance-levels">
+                        <div class="clearance-level" onclick="selectClearance(this, 'public')">
+                            <div>📄</div>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem;">Public</div>
+                        </div>
+                        <div class="clearance-level" onclick="selectClearance(this, 'cui')">
+                            <div>🔒</div>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem;">CUI</div>
+                        </div>
+                        <div class="clearance-level" onclick="selectClearance(this, 'confidential')">
+                            <div>🔐</div>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem;">Confidential</div>
+                        </div>
+                        <div class="clearance-level" onclick="selectClearance(this, 'secret')">
+                            <div>🛡️</div>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem;">Secret</div>
+                        </div>
+                        <div class="clearance-level" onclick="selectClearance(this, 'top-secret')">
+                            <div>🔺</div>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem;">Top Secret</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sovereign Wallet Setup -->
+                <div class="form-section">
+                    <h3>🏛️ Sovereign Wallet & Domain</h3>
+                    <button class="wallet-connect" onclick="connectSovereignWallet()">
+                        Setup Air-Gapped HNS.ID Wallet
+                    </button>
+                    <div class="form-group">
+                        <label for="sovereign-domain">Sovereign Domain</label>
+                        <input type="text" id="sovereign-domain" placeholder="dept-tech-gov" style="text-align: center;">
+                        <p style="color: var(--platinum); font-size: 0.8rem; margin-top: 0.5rem; text-align: center;">
+                            Will become: dept-tech-gov.hns.id (isolated domain management)
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="form-section">
+                    <h3>👨‍💼 Authorized Contact</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact-name">Contracting Officer Name</label>
+                            <input type="text" id="contact-name" placeholder="John Smith" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-title">Title</label>
+                            <input type="text" id="contact-title" placeholder="Chief Information Officer" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contact-email">Official Email</label>
+                            <input type="email" id="contact-email" placeholder="john.smith@agency.gov" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="contact-phone">Secure Phone</label>
+                            <input type="tel" id="contact-phone" placeholder="+1 (555) 123-4567" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mission Requirements -->
+                <div class="form-section">
+                    <h3>🎯 Mission Requirements</h3>
+                    <div class="form-group">
+                        <label for="mission-desc">Mission-critical AI applications</label>
+                        <textarea id="mission-desc" placeholder="e.g., Intelligence analysis, cybersecurity, logistics optimization, decision support..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Security Notice -->
+            <div class="security-notice">
+                <h4>🔒 SECURITY & COMPLIANCE GUARANTEE</h4>
+                <p>All government deployments undergo rigorous security assessment and continuous monitoring. Data sovereignty is maintained through air-gapped infrastructure options. Full audit trails and compliance reporting available for all security frameworks including FedRAMP, FISMA, and DoD IL-4.</p>
+            </div>
+
+            <!-- Plan Summary -->
+            <div class="plan-summary">
+                <h3>🏛️ Government Plan Summary</h3>
+                <div class="summary-item">
+                    <span>Deployment Type</span>
+                    <span id="deployment-type">Not selected</span>
+                </div>
+                <div class="summary-item">
+                    <span>Security Clearance</span>
+                    <span id="clearance-level">Not selected</span>
+                </div>
+                <div class="summary-item">
+                    <span>Sovereign HNS.ID Domain</span>
+                    <span>Included</span>
+                </div>
+                <div class="summary-item">
+                    <span>FedRAMP Compliance</span>
+                    <span>Included</span>
+                </div>
+                <div class="summary-item">
+                    <span>GSA Schedule</span>
+                    <span>Available</span>
+                </div>
+                <div class="summary-item">
+                    <span>Contract Terms</span>
+                    <span>Custom Procurement</span>
+                </div>
+            </div>
+
+            <button class="signup-btn" onclick="completeSignup()">
+                Submit Government RFP
+            </button>
+
+            <div style="text-align: center; margin-top: 2rem; color: var(--platinum); font-size: 0.8rem;">
+                Government RFPs are processed through secure channels. Our compliance team will contact you within 48 hours.
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let selectedDeployment = null;
+        let selectedClearance = null;
+
+        function selectDeployment(element, deployment) {
+            document.querySelectorAll('.deployment-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedDeployment = deployment;
+            
+            const deploymentNames = {
+                'fedramp-cloud': 'FedRAMP Cloud',
+                'govcloud': 'AWS GovCloud',
+                'air-gapped': 'Air-Gapped',
+                'hybrid': 'Hybrid Sovereign'
+            };
+            
+            document.getElementById('deployment-type').textContent = deploymentNames[deployment];
+        }
+
+        function selectClearance(element, clearance) {
+            document.querySelectorAll('.clearance-level').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedClearance = clearance;
+            
+            const clearanceNames = {
+                'public': 'Public',
+                'cui': 'CUI',
+                'confidential': 'Confidential',
+                'secret': 'Secret',
+                'top-secret': 'Top Secret'
+            };
+            
+            document.getElementById('clearance-level').textContent = clearanceNames[clearance];
+        }
+
+        function connectSovereignWallet() {
+            alert('🏛️ Sovereign Wallet Setup\n\nConnecting to Air-Gapped CrossMint...\n• Government identity verification\n• Sovereign domain provisioning\n• Air-gapped payment processing\n• Compliance activation\n• Security clearance validation\n\nThis will initiate secure government onboarding.');
+        }
+
+        function completeSignup() {
+            const agencyName = document.getElementById('agency-name').value;
+            const cageCode = document.getElementById('cage-code').value;
+            const contactName = document.getElementById('contact-name').value;
+            
+            if (!agencyName || !cageCode || !contactName || !selectedDeployment || !selectedClearance) {
+                alert('Please complete all required fields including agency information, deployment type, and security clearance level.');
+                return;
+            }
+            
+            alert(`🎉 Government RFP Submitted!\n\nAgency: ${agencyName}\nCAGE Code: ${cageCode}\nDeployment: ${document.getElementById('deployment-type').textContent}\nClearance: ${document.getElementById('clearance-level').textContent}\nContact: ${contactName}\n\nOur government compliance team will process your RFP through secure channels and provide custom procurement documentation within 48 hours.\n\nThank you for choosing Agentic Web for your mission-critical AI infrastructure.`);
+        }
+    </script>
+</body>
+</html>

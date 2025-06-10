@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pro Plan Signup | Agentic Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #ffffff;
+            --neural-blue: #00d4ff;
+            --quantum-purple: #8b5cf6;
+            --energy-green: #10b981;
+            --gold: #d4af37;
+            --platinum: #e5e7eb;
+            --dark-bg: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--neural-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links button:hover {
+            color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Main Content */
+        .main {
+            padding: 120px 0 80px 0;
+            min-height: 100vh;
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .signup-header h1 {
+            font-size: 2.5rem;
+            font-weight: 100;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .signup-header .pro-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--quantum-purple) 0%, var(--neural-blue) 100%);
+            color: var(--accent);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .signup-header p {
+            color: var(--quantum-purple);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .signup-form {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-section h3 {
+            color: var(--quantum-purple);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--accent);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--quantum-purple);
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+        }
+
+        .domain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .domain-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .domain-option:hover {
+            border-color: var(--quantum-purple);
+            transform: translateY(-2px);
+        }
+
+        .domain-option.selected {
+            border-color: var(--quantum-purple);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .team-section {
+            background: rgba(139, 92, 246, 0.05);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .team-member {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .team-member input {
+            flex: 1;
+        }
+
+        .remove-btn {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff6b6b;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background: rgba(255, 0, 0, 0.3);
+        }
+
+        .add-member-btn {
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid var(--quantum-purple);
+            color: var(--quantum-purple);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .add-member-btn:hover {
+            background: var(--quantum-purple);
+            color: var(--accent);
+        }
+
+        .plan-summary {
+            background: rgba(139, 92, 246, 0.05);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .plan-summary h3 {
+            color: var(--quantum-purple);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            color: var(--quantum-purple);
+        }
+
+        .signup-btn {
+            background: linear-gradient(135deg, var(--quantum-purple) 0%, var(--neural-blue) 100%);
+            color: var(--accent);
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .pro-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .feature-card h4 {
+            color: var(--quantum-purple);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-card li {
+            color: var(--platinum);
+            font-size: 0.85rem;
+            padding: 0.25rem 0;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .feature-card li::before {
+            content: "⚡";
+            position: absolute;
+            left: 0;
+            color: var(--quantum-purple);
+        }
+
+        @media (max-width: 768px) {
+            .signup-form {
+                padding: 2rem;
+            }
+            
+            .domain-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .pro-features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="nav-logo">AGENTIC🌐</a>
+            <div class="nav-links">
+                <button onclick="window.location.href='aiva.html'">AIVA</button>
+                <button onclick="window.location.href='fugio.html'">Fugio</button>
+                <button onclick="window.location.href='vibecoder.html'">VibeCoder</button>
+                <button onclick="window.location.href='enterprise.html'">Enterprise</button>
+                <button onclick="window.location.href='contact.html'">Contact</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="signup-header">
+                <div class="pro-badge">⚡ PRO PLAN</div>
+                <h1>Pro Plan Signup</h1>
+                <p>Advanced AI workspace with team collaboration</p>
+            </div>
+
+            <!-- Pro Features Overview -->
+            <div class="pro-features">
+                <div class="feature-card">
+                    <h4>🤖 Advanced AI Agents</h4>
+                    <ul>
+                        <li>Up to 3 AI agents</li>
+                        <li>10GB shared memory</li>
+                        <li>Semi-autonomous operation</li>
+                        <li>Advanced training capabilities</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>🌐 Enhanced Network Access</h4>
+                    <ul>
+                        <li>Dedicated node pool</li>
+                        <li>Region selection (US/EU/Asia)</li>
+                        <li>Latency vs. cost optimization</li>
+                        <li>Priority queue access</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>👥 Team Collaboration</h4>
+                    <ul>
+                        <li>Up to 3 teammates</li>
+                        <li>3 private workspaces</li>
+                        <li>Shared agent access</li>
+                        <li>Team management tools</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>📈 Staking & Yield</h4>
+                    <ul>
+                        <li>$100-$1,000 staking tiers</li>
+                        <li>SLA dashboard access</li>
+                        <li>Tier 3 tranche access</li>
+                        <li>Basic yield vaults</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="signup-form">
+                <!-- Wallet Connection -->
+                <div class="form-section">
+                    <h3>🔐 Enhanced Authentication</h3>
+                    <button class="wallet-connect" onclick="connectWallet()" style="background: linear-gradient(135deg, var(--quantum-purple) 0%, var(--neural-blue) 100%); color: var(--accent); border: none; padding: 1rem 2rem; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%; margin-bottom: 1rem;">
+                        Connect CrossMint Wallet + 2FA
+                    </button>
+                    <p style="color: var(--platinum); font-size: 0.8rem; text-align: center;">
+                        Multi-device authentication with on-chain verification
+                    </p>
+                </div>
+
+                <!-- Domain Selection -->
+                <div class="form-section">
+                    <h3>🌐 Domain Portfolio (Up to 3)</h3>
+                    <div class="form-group">
+                        <label for="primary-domain">Primary HNS.ID handle</label>
+                        <input type="text" id="primary-domain" placeholder="yourname" style="text-align: center;">
+                    </div>
+                    <div class="domain-grid">
+                        <div class="domain-option" onclick="selectDomain(this)">
+                            <div>📱</div>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem;">Mobile Handle</div>
+                        </div>
+                        <div class="domain-option" onclick="selectDomain(this)">
+                            <div>💼</div>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem;">Business Handle</div>
+                        </div>
+                        <div class="domain-option" onclick="selectDomain(this)">
+                            <div>🎨</div>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem;">Creative Handle</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Setup -->
+                <div class="team-section">
+                    <h3>👥 Team Setup (Up to 3 members)</h3>
+                    <div id="team-members">
+                        <div class="team-member">
+                            <input type="email" placeholder="teammate@example.com">
+                            <select>
+                                <option>Editor</option>
+                                <option>Viewer</option>
+                                <option>Admin</option>
+                            </select>
+                            <button class="remove-btn" onclick="removeMember(this)">×</button>
+                        </div>
+                    </div>
+                    <button class="add-member-btn" onclick="addMember()">+ Add Team Member</button>
+                </div>
+
+                <!-- Staking Options -->
+                <div class="form-section">
+                    <h3>📈 Staking Tier Selection</h3>
+                    <div class="form-group">
+                        <label for="stake-amount">Stake Amount (Optional)</label>
+                        <select id="stake-amount">
+                            <option value="0">No Staking ($0)</option>
+                            <option value="100">Micro Stake ($100)</option>
+                            <option value="500">Standard Stake ($500)</option>
+                            <option value="1000">Premium Stake ($1,000)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plan Summary -->
+            <div class="plan-summary">
+                <h3>⚡ Pro Plan Summary</h3>
+                <div class="summary-item">
+                    <span>Monthly Subscription</span>
+                    <span>$49.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>HNS.ID Domains (up to 3)</span>
+                    <span>Included</span>
+                </div>
+                <div class="summary-item">
+                    <span>Team Members (up to 3)</span>
+                    <span>Included</span>
+                </div>
+                <div class="summary-item">
+                    <span>Staking (Optional)</span>
+                    <span id="staking-cost">$0.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Total Monthly</span>
+                    <span id="total-cost">$49.00</span>
+                </div>
+            </div>
+
+            <button class="signup-btn" onclick="completeSignup()">
+                Activate Pro Plan
+            </button>
+
+            <div style="text-align: center; margin-top: 2rem; color: var(--platinum); font-size: 0.8rem;">
+                By signing up, you agree to our <a href="#" style="color: var(--quantum-purple);">Terms of Service</a> and <a href="#" style="color: var(--quantum-purple);">Privacy Policy</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function connectWallet() {
+            alert('🔗 Pro Wallet Connection\n\nConnecting to CrossMint Pro...\n• Multi-device authentication\n• 2FA setup\n• On-chain verification\n• Enhanced security protocols\n\nThis will redirect to CrossMint Pro authentication.');
+        }
+
+        function selectDomain(element) {
+            element.classList.toggle('selected');
+        }
+
+        function addMember() {
+            const container = document.getElementById('team-members');
+            const memberDiv = document.createElement('div');
+            memberDiv.className = 'team-member';
+            memberDiv.innerHTML = `
+                <input type="email" placeholder="teammate@example.com">
+                <select>
+                    <option>Editor</option>
+                    <option>Viewer</option>
+                    <option>Admin</option>
+                </select>
+                <button class="remove-btn" onclick="removeMember(this)">×</button>
+            `;
+            container.appendChild(memberDiv);
+        }
+
+        function removeMember(button) {
+            button.parentElement.remove();
+        }
+
+        document.getElementById('stake-amount').addEventListener('change', function() {
+            const stakeAmount = parseInt(this.value);
+            const basePrice = 49;
+            const total = basePrice + stakeAmount;
+            
+            document.getElementById('staking-cost').textContent = `$${stakeAmount}.00`;
+            document.getElementById('total-cost').textContent = `$${total}.00`;
+        });
+
+        function completeSignup() {
+            alert('🎉 Welcome to Agentic Web Pro!\n\nYour Pro plan is being activated:\n• Enhanced CrossMint wallet connected\n• Multiple HNS.ID domains claimed\n• Team workspace provisioning\n• Advanced AI agents initializing\n• Staking tier activated\n\nRedirecting to your Pro dashboard...');
+        }
+    </script>
+</body>
+</html>

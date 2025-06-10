@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Plan Signup | Agentic Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #ffffff;
+            --neural-blue: #00d4ff;
+            --quantum-purple: #8b5cf6;
+            --energy-green: #10b981;
+            --gold: #d4af37;
+            --platinum: #e5e7eb;
+            --dark-bg: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--neural-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links button:hover {
+            color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Main Content */
+        .main {
+            padding: 120px 0 80px 0;
+            min-height: 100vh;
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .signup-header h1 {
+            font-size: 2.5rem;
+            font-weight: 100;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .business-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--neural-blue) 100%);
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .signup-header p {
+            color: var(--gold);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .signup-form {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+        }
+
+        .form-section h3 {
+            color: var(--gold);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--accent);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+        }
+
+        .credit-terms {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--gold);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .credit-terms h3 {
+            color: var(--gold);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .terms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .term-option {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .term-option:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
+
+        .term-option.selected {
+            border-color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .term-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .term-desc {
+            font-size: 0.8rem;
+            color: var(--platinum);
+        }
+
+        .team-section {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+        }
+
+        .team-member {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            align-items: center;
+        }
+
+        .remove-btn {
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff6b6b;
+            padding: 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .remove-btn:hover {
+            background: rgba(255, 0, 0, 0.3);
+        }
+
+        .add-member-btn {
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid var(--neural-blue);
+            color: var(--neural-blue);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .add-member-btn:hover {
+            background: var(--neural-blue);
+            color: var(--accent);
+        }
+
+        .wallet-connect {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--neural-blue) 100%);
+            color: var(--primary);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .wallet-connect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .plan-summary {
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .plan-summary h3 {
+            color: var(--gold);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            color: var(--gold);
+        }
+
+        .signup-btn {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--neural-blue) 100%);
+            color: var(--primary);
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .credit-notice {
+            background: rgba(255, 0, 0, 0.05);
+            border: 2px solid rgba(255, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .credit-notice h4 {
+            color: #ff6b6b;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .credit-notice p {
+            color: var(--accent);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .signup-form {
+                padding: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .terms-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-member {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav-logo">AGENTIC🌐</a>
+            <div class="nav-links">
+                <button onclick="window.location.href='aiva.html'">AIVA</button>
+                <button onclick="window.location.href='fugio.html'">Fugio</button>
+                <button onclick="window.location.href='vibecoder.html'">VibeCoder</button>
+                <button onclick="window.location.href='enterprise.html'">Enterprise</button>
+                <button onclick="window.location.href='contact.html'">Contact</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="signup-header">
+                <div class="business-badge">🏢 BUSINESS PLAN</div>
+                <h1>Business Plan Signup</h1>
+                <p>Enterprise AI infrastructure with credit terms and team collaboration</p>
+            </div>
+
+            <div class="signup-form">
+                <!-- Company Information -->
+                <div class="form-section">
+                    <h3>🏢 Company Information</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="company-name">Company Name</label>
+                            <input type="text" id="company-name" placeholder="Acme Corporation" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company-size">Company Size</label>
+                            <select id="company-size" required>
+                                <option value="">Select size</option>
+                                <option value="1-10">1-10 employees</option>
+                                <option value="11-50">11-50 employees</option>
+                                <option value="51-200">51-200 employees</option>
+                                <option value="201-1000">201-1000 employees</option>
+                                <option value="1000+">1000+ employees</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="industry">Industry</label>
+                            <select id="industry" required>
+                                <option value="">Select industry</option>
+                                <option value="technology">Technology</option>
+                                <option value="finance">Finance</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="manufacturing">Manufacturing</option>
+                                <option value="retail">Retail</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="tax-id">Tax ID / EIN</label>
+                            <input type="text" id="tax-id" placeholder="12-3456789" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Corporate Wallet Setup -->
+                <div class="form-section">
+                    <h3>🔐 Corporate Wallet & Identity</h3>
+                    <button class="wallet-connect" onclick="connectCorporateWallet()">
+                        Connect CrossMint Enterprise Wallet
+                    </button>
+                    <div class="form-group">
+                        <label for="corporate-domain">Corporate HNS.ID Domain</label>
+                        <input type="text" id="corporate-domain" placeholder="acme-corp" style="text-align: center;">
+                        <p style="color: var(--platinum); font-size: 0.8rem; margin-top: 0.5rem; text-align: center;">
+                            Will become: acme-corp.hns.id (bulk provisioning available)
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Credit Terms Selection -->
+                <div class="form-section">
+                    <h3>💳 Credit Terms Selection</h3>
+                    <div class="terms-grid">
+                        <div class="term-option" onclick="selectTerm(this, 'net30')">
+                            <div class="term-name">Net 30</div>
+                            <div class="term-desc">Payment due in 30 days</div>
+                        </div>
+                        <div class="term-option" onclick="selectTerm(this, 'net60')">
+                            <div class="term-name">Net 60</div>
+                            <div class="term-desc">Payment due in 60 days</div>
+                        </div>
+                        <div class="term-option" onclick="selectTerm(this, 'net90')">
+                            <div class="term-name">Net 90</div>
+                            <div class="term-desc">Payment due in 90 days</div>
+                        </div>
+                        <div class="term-option" onclick="selectTerm(this, 'net120')">
+                            <div class="term-name">Net 120</div>
+                            <div class="term-desc">Payment due in 120 days</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Setup -->
+                <div class="team-section">
+                    <h3>👥 Team Setup (Up to 500+ members)</h3>
+                    <div id="team-members">
+                        <div class="team-member">
+                            <input type="email" placeholder="admin@company.com">
+                            <select>
+                                <option>Admin</option>
+                                <option>Manager</option>
+                                <option>Editor</option>
+                                <option>Viewer</option>
+                            </select>
+                            <select>
+                                <option>All Workspaces</option>
+                                <option>Development</option>
+                                <option>Marketing</option>
+                                <option>Sales</option>
+                            </select>
+                            <button class="remove-btn" onclick="removeMember(this)">×</button>
+                        </div>
+                    </div>
+                    <button class="add-member-btn" onclick="addMember()">+ Add Team Member</button>
+                </div>
+
+                <!-- Use Case -->
+                <div class="form-section">
+                    <h3>🎯 Primary Use Case</h3>
+                    <div class="form-group">
+                        <label for="use-case">Describe your primary AI use case</label>
+                        <textarea id="use-case" placeholder="e.g., Customer service automation, content generation, data analysis..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Credit Notice -->
+            <div class="credit-notice">
+                <h4>⚠️ CREDIT TERMS NOTICE</h4>
+                <p>By selecting credit terms, you authorize the creation of a digital business credit profile. Payment activity will be reported to credit bureaus and may impact future credit terms and service access across the Agentic Web ecosystem.</p>
+            </div>
+
+            <!-- Plan Summary -->
+            <div class="plan-summary">
+                <h3>🏢 Business Plan Summary</h3>
+                <div class="summary-item">
+                    <span>Base Monthly Service</span>
+                    <span>Custom Pricing</span>
+                </div>
+                <div class="summary-item">
+                    <span>Corporate HNS.ID Domain</span>
+                    <span>Included</span>
+                </div>
+                <div class="summary-item">
+                    <span>Team Members</span>
+                    <span id="team-count">1 member</span>
+                </div>
+                <div class="summary-item">
+                    <span>Credit Terms</span>
+                    <span id="selected-terms">Not selected</span>
+                </div>
+                <div class="summary-item">
+                    <span>Setup Fee</span>
+                    <span>$0.00</span>
+                </div>
+            </div>
+
+            <button class="signup-btn" onclick="completeSignup()">
+                Submit Business Application
+            </button>
+
+            <div style="text-align: center; margin-top: 2rem; color: var(--platinum); font-size: 0.8rem;">
+                Business applications are reviewed within 24 hours. You'll receive contract terms and pricing via email.
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let teamCount = 1;
+        let selectedTerms = null;
+
+        function connectCorporateWallet() {
+            alert('🏢 Corporate Wallet Setup\n\nConnecting to CrossMint Enterprise...\n• Corporate identity verification\n• Multi-signature wallet setup\n• API key generation\n• Credit scoring initialization\n\nThis will redirect to CrossMint Enterprise onboarding.');
+        }
+
+        function selectTerm(element, term) {
+            document.querySelectorAll('.term-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedTerms = term;
+            
+            const termNames = {
+                'net30': 'Net 30 Days',
+                'net60': 'Net 60 Days',
+                'net90': 'Net 90 Days',
+                'net120': 'Net 120 Days'
+            };
+            
+            document.getElementById('selected-terms').textContent = termNames[term];
+        }
+
+        function addMember() {
+            const container = document.getElementById('team-members');
+            const memberDiv = document.createElement('div');
+            memberDiv.className = 'team-member';
+            memberDiv.innerHTML = `
+                <input type="email" placeholder="member@company.com">
+                <select>
+                    <option>Editor</option>
+                    <option>Manager</option>
+                    <option>Admin</option>
+                    <option>Viewer</option>
+                </select>
+                <select>
+                    <option>Development</option>
+                    <option>All Workspaces</option>
+                    <option>Marketing</option>
+                    <option>Sales</option>
+                </select>
+                <button class="remove-btn" onclick="removeMember(this)">×</button>
+            `;
+            container.appendChild(memberDiv);
+            teamCount++;
+            updateTeamCount();
+        }
+
+        function removeMember(button) {
+            button.parentElement.remove();
+            teamCount--;
+            updateTeamCount();
+        }
+
+        function updateTeamCount() {
+            document.getElementById('team-count').textContent = `${teamCount} member${teamCount !== 1 ? 's' : ''}`;
+        }
+
+        function completeSignup() {
+            const companyName = document.getElementById('company-name').value;
+            const companySize = document.getElementById('company-size').value;
+            
+            if (!companyName || !companySize || !selectedTerms) {
+                alert('Please complete all required fields including company information and credit terms.');
+                return;
+            }
+            
+            alert(`🎉 Business Application Submitted!\n\nCompany: ${companyName}\nSize: ${companySize}\nCredit Terms: ${document.getElementById('selected-terms').textContent}\nTeam Size: ${teamCount} members\n\nOur enterprise team will review your application and send custom pricing within 24 hours.\n\nThank you for choosing Agentic Web!`);
+        }
+    </script>
+</body>
+</html>

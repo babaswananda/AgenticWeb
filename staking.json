@@ -1,0 +1,110 @@
+{
+  "tiers": {
+    "1": {
+      "name": "Protocol Tier 1",
+      "minStakeUSD": 1200,
+      "sla": "99.5%",
+      "apy": 0.0,
+      "yield": "None",
+      "trancheAccess": "None",
+      "benefits": [
+        "Basic SLA (99.5%)",
+        "Priority Queue Only",
+        "No Yield"
+      ],
+      "description": "Entry-level protocol commitment for enhanced service priority"
+    },
+    "2": {
+      "name": "Protocol Tier 2",
+      "minStakeUSD": 5000,
+      "sla": "99.9%",
+      "apy": 8.2,
+      "yield": "Tranche Tokens",
+      "trancheAccess": "Tier 3",
+      "benefits": [
+        "Enhanced SLA (99.9%)",
+        "8.2% APY Tranche Tokens",
+        "Tier 3 Access"
+      ],
+      "description": "Professional-grade commitment with yield generation"
+    },
+    "3": {
+      "name": "Protocol Tier 3",
+      "minStakeUSD": 12000,
+      "sla": "99.99%",
+      "apy": 12.7,
+      "yield": "Revenue Share",
+      "trancheAccess": "Tier 1–3",
+      "benefits": [
+        "Premium SLA (99.99%)",
+        "12.7% APY Revenue Share",
+        "Tier 1–3 Access"
+      ],
+      "description": "Enterprise-level commitment with revenue participation"
+    },
+    "4": {
+      "name": "Protocol Tier 4 – Mission Critical",
+      "minStakeUSD": 50000,
+      "sla": "99.999%",
+      "apy": 15.0,
+      "yield": "Tokenized Equity",
+      "trancheAccess": "Tier 0–3 + SPV",
+      "benefits": [
+        "SLA 99.999%",
+        "Tokenized Equity",
+        "Tier 0–3 + SPV Participation"
+      ],
+      "description": "Institutional-grade commitment with equity participation"
+    }
+  },
+  "riskDisclosure": {
+    "title": "Staking Risk Disclosure",
+    "content": "Staking involves risk. Funds may be subject to market volatility, smart contract vulnerabilities, and slashing in the event of SLA violations. Only stake what you can afford to lose.",
+    "risks": [
+      "Market volatility affecting staked token values",
+      "Smart contract vulnerabilities and potential exploits",
+      "SLA violation penalties and potential slashing",
+      "Liquidity risks during unstaking periods",
+      "Regulatory changes affecting yield structures"
+    ]
+  },
+  "contractInfo": {
+    "name": "AgenticStaking",
+    "version": "1.0.0",
+    "network": "Ethereum",
+    "interface": "ERC-4626",
+    "features": [
+      "Tiered staking with SLA guarantees",
+      "Automated yield distribution",
+      "Tranche token minting",
+      "Revenue sharing mechanisms",
+      "Equity tokenization for Tier 4"
+    ]
+  },
+  "yieldTypes": {
+    "none": {
+      "name": "No Yield",
+      "apy": 0.0,
+      "description": "Priority queue access only",
+      "riskLevel": "None"
+    },
+    "trancheTokens": {
+      "name": "Tranche Tokens",
+      "apy": 8.2,
+      "description": "Revenue-backed tokens with quarterly distributions",
+      "riskLevel": "Medium"
+    },
+    "revenueShare": {
+      "name": "Revenue Sharing",
+      "apy": 12.7,
+      "description": "Direct participation in platform revenue growth",
+      "riskLevel": "Medium-High"
+    },
+    "tokenizedEquity": {
+      "name": "Tokenized Equity",
+      "apy": 15.0,
+      "description": "Equity participation with SPV access",
+      "riskLevel": "High"
+    }
+  }
+}

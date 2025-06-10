@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Enterprise Solutions | Agentic Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #ffffff;
+            --neural-blue: #00d4ff;
+            --quantum-purple: #8b5cf6;
+            --energy-green: #10b981;
+            --gold: #d4af37;
+            --platinum: #e5e7eb;
+            --dark-bg: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--neural-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links button:hover {
+            color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px 0;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--dark-bg) 100%);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 100;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--neural-blue) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--platinum);
+            margin-bottom: 3rem;
+            font-weight: 300;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: var(--dark-bg);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .contact-info {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 3rem;
+        }
+
+        .contact-form {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 3rem;
+        }
+
+        .contact-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .contact-label {
+            font-size: 0.9rem;
+            color: var(--neural-blue);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .contact-value {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 400;
+        }
+
+        .contact-desc {
+            font-size: 0.9rem;
+            color: var(--platinum);
+            margin-top: 0.5rem;
+            font-weight: 300;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--neural-blue);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            color: var(--accent);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--neural-blue);
+            box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-button {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: var(--neural-blue);
+            color: var(--primary);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-button:hover {
+            background: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Enterprise Section */
+        .enterprise {
+            padding: 80px 0;
+            background: var(--primary);
+        }
+
+        .enterprise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .enterprise-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .enterprise-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        .enterprise-title {
+            font-size: 1.2rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .enterprise-desc {
+            color: var(--platinum);
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--dark-bg);
+        }
+
+        .footer p {
+            color: var(--platinum);
+            font-weight: 300;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 100;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--neural-blue);
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav-logo">AGENTIC🌐</a>
+            <div class="nav-links">
+                <button onclick="window.location.href='aiva.html'">AIVA</button>
+                <button onclick="window.location.href='fugio.html'">Fugio</button>
+                <button onclick="window.location.href='vibecoder.html'">VibeCoder</button>
+                <button onclick="window.location.href='enterprise.html'">Enterprise</button>
+                <button onclick="window.location.href='contact.html'">Contact</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Enterprise Contact</h1>
+            <p>Connect with our team for enterprise AI solutions and implementation</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title">Get in Touch</h2>
+            <p class="section-subtitle">Ready to transform your organization with AI?</p>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-label">Enterprise Sales</div>
+                        <div class="contact-value">enterprise@agentic.web</div>
+                        <div class="contact-desc">For enterprise licensing, custom implementations, and volume pricing</div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-label">Technical Support</div>
+                        <div class="contact-value">support@agentic.web</div>
+                        <div class="contact-desc">24/7 technical support for enterprise customers</div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-label">Partnership Inquiries</div>
+                        <div class="contact-value">partners@agentic.web</div>
+                        <div class="contact-desc">Strategic partnerships and integration opportunities</div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-label">Headquarters</div>
+                        <div class="contact-value">San Francisco, CA</div>
+                        <div class="contact-desc">Global headquarters with offices in NYC, London, and Singapore</div>
+                    </div>
+                </div>
+                
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Company Email</label>
+                            <input type="email" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Company</label>
+                            <input type="text" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Interest Area</label>
+                            <select class="form-select" required>
+                                <option value="">Select a solution</option>
+                                <option value="aiva">AIVA - Neural Voice Interface</option>
+                                <option value="fugio">Fugio Protocol - Quantum Economics</option>
+                                <option value="vibecoder">VibeCoder - Development Suite</option>
+                                <option value="custom">Custom Enterprise Solution</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Message</label>
+                            <textarea class="form-textarea" placeholder="Tell us about your requirements and use case..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="form-button">Send Enterprise Inquiry</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enterprise Services -->
+    <section class="enterprise">
+        <div class="container">
+            <h2 class="section-title">Enterprise Services</h2>
+            <p class="section-subtitle">Comprehensive support for enterprise deployments</p>
+            
+            <div class="enterprise-grid">
+                <div class="enterprise-card">
+                    <div class="enterprise-icon">🏢</div>
+                    <div class="enterprise-title">Custom Implementation</div>
+                    <div class="enterprise-desc">Tailored solutions designed for your specific business requirements and infrastructure</div>
+                </div>
+                
+                <div class="enterprise-card">
+                    <div class="enterprise-icon">🔧</div>
+                    <div class="enterprise-title">Professional Services</div>
+                    <div class="enterprise-desc">Expert consulting, training, and ongoing support from our technical team</div>
+                </div>
+                
+                <div class="enterprise-card">
+                    <div class="enterprise-icon">🛡️</div>
+                    <div class="enterprise-title">Security & Compliance</div>
+                    <div class="enterprise-desc">Enterprise-grade security with SOC 2, GDPR, and HIPAA compliance</div>
+                </div>
+                
+                <div class="enterprise-card">
+                    <div class="enterprise-icon">📊</div>
+                    <div class="enterprise-title">Analytics & Reporting</div>
+                    <div class="enterprise-desc">Comprehensive analytics dashboard with custom reporting and insights</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Agentic Web. All rights reserved. Enterprise AI Solutions.</p>
+        </div>
+    </footer>
+</body>
+</html>

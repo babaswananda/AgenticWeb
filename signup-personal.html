@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Plan Signup | Agentic Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #ffffff;
+            --neural-blue: #00d4ff;
+            --quantum-purple: #8b5cf6;
+            --energy-green: #10b981;
+            --gold: #d4af37;
+            --platinum: #e5e7eb;
+            --dark-bg: #0a0a0a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--neural-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links button:hover {
+            color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Main Content */
+        .main {
+            padding: 120px 0 80px 0;
+            min-height: 100vh;
+        }
+
+        .signup-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .signup-header h1 {
+            font-size: 2.5rem;
+            font-weight: 100;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .signup-header p {
+            color: var(--neural-blue);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .signup-form {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-section h3 {
+            color: var(--gold);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            color: var(--accent);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--neural-blue);
+            box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
+        }
+
+        .wallet-connect {
+            background: linear-gradient(135deg, var(--neural-blue) 0%, var(--quantum-purple) 100%);
+            color: var(--accent);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+
+        .wallet-connect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .payment-method {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .payment-method:hover {
+            border-color: var(--neural-blue);
+            transform: translateY(-2px);
+        }
+
+        .payment-method.selected {
+            border-color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .plan-summary {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .plan-summary h3 {
+            color: var(--neural-blue);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            color: var(--neural-blue);
+        }
+
+        .signup-btn {
+            background: linear-gradient(135deg, var(--energy-green) 0%, var(--neural-blue) 100%);
+            color: var(--accent);
+            border: none;
+            padding: 1.2rem 3rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .signup-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .terms {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--platinum);
+            font-size: 0.8rem;
+        }
+
+        .terms a {
+            color: var(--neural-blue);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .signup-form {
+                padding: 2rem;
+            }
+            
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <a href="index.html" class="nav-logo">AGENTIC🌐</a>
+            <div class="nav-links">
+                <button onclick="window.location.href='aiva.html'">AIVA</button>
+                <button onclick="window.location.href='fugio.html'">Fugio</button>
+                <button onclick="window.location.href='vibecoder.html'">VibeCoder</button>
+                <button onclick="window.location.href='enterprise.html'">Enterprise</button>
+                <button onclick="window.location.href='contact.html'">Contact</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="signup-header">
+                <h1>Personal Plan Signup</h1>
+                <p>Get started with your personal AI workspace</p>
+            </div>
+
+            <div class="signup-form">
+                <!-- Wallet Connection -->
+                <div class="form-section">
+                    <h3>🔐 Connect Your Wallet</h3>
+                    <button class="wallet-connect" onclick="connectWallet()">
+                        Connect CrossMint Wallet
+                    </button>
+                    <p style="color: var(--platinum); font-size: 0.8rem; text-align: center;">
+                        Your HNS.ID domain will be your identity and payment gateway
+                    </p>
+                </div>
+
+                <!-- Domain Selection -->
+                <div class="form-section">
+                    <h3>🌐 Claim Your Domain</h3>
+                    <div class="form-group">
+                        <label for="domain">Choose your HNS.ID handle</label>
+                        <input type="text" id="domain" placeholder="yourname" style="text-align: center;">
+                        <p style="color: var(--platinum); font-size: 0.8rem; margin-top: 0.5rem; text-align: center;">
+                            Will become: yourname.hns.id
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Payment Method -->
+                <div class="form-section">
+                    <h3>💳 Payment Method</h3>
+                    <div class="payment-methods">
+                        <div class="payment-method" onclick="selectPayment(this)">
+                            <div>💳</div>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem;">Card</div>
+                        </div>
+                        <div class="payment-method" onclick="selectPayment(this)">
+                            <div>📱</div>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem;">Apple Pay</div>
+                        </div>
+                        <div class="payment-method" onclick="selectPayment(this)">
+                            <div>🪙</div>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem;">ETH</div>
+                        </div>
+                        <div class="payment-method" onclick="selectPayment(this)">
+                            <div>💰</div>
+                            <div style="font-size: 0.8rem; margin-top: 0.5rem;">USDC</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plan Summary -->
+            <div class="plan-summary">
+                <h3>👤 Personal Plan Summary</h3>
+                <div class="summary-item">
+                    <span>Monthly Subscription</span>
+                    <span>$9.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>HNS.ID Domain (1 year)</span>
+                    <span>Included</span>
+                </div>
+                <div class="summary-item">
+                    <span>Setup Fee</span>
+                    <span>$0.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Total Monthly</span>
+                    <span>$9.00</span>
+                </div>
+            </div>
+
+            <button class="signup-btn" onclick="completeSignup()">
+                Complete Signup
+            </button>
+
+            <div class="terms">
+                By signing up, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function connectWallet() {
+            alert('🔗 CrossMint Wallet Connection\n\nConnecting to CrossMint...\n• Verify identity\n• Enable payments\n• Claim HNS.ID domain\n\nThis will redirect to CrossMint authentication.');
+        }
+
+        function selectPayment(element) {
+            document.querySelectorAll('.payment-method').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+        }
+
+        function completeSignup() {
+            alert('🎉 Welcome to Agentic Web!\n\nYour Personal plan is being activated:\n• CrossMint wallet connected\n• HNS.ID domain claimed\n• Payment method configured\n• AI workspace provisioning...\n\nRedirecting to your dashboard...');
+        }
+    </script>
+</body>
+</html>

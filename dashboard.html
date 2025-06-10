@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Agentic Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #ffffff;
+            --neural-blue: #00d4ff;
+            --quantum-purple: #8b5cf6;
+            --energy-green: #10b981;
+            --gold: #d4af37;
+            --platinum: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--neural-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links button:hover {
+            color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .main {
+            padding: 120px 0 80px 0;
+            min-height: 100vh;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-title h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-subtitle {
+            color: var(--neural-blue);
+            font-size: 1rem;
+            font-weight: 300;
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--energy-green);
+            border-radius: 20px;
+            padding: 0.5rem 1rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--energy-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .main-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .side-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .panel {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+
+        .panel h3 {
+            color: var(--neural-blue);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .agent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .agent-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .agent-card:hover {
+            border-color: var(--neural-blue);
+            transform: translateY(-2px);
+        }
+
+        .agent-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .agent-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .agent-status {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--energy-green);
+        }
+
+        .agent-role {
+            font-size: 0.75rem;
+            color: var(--platinum);
+            margin-bottom: 0.5rem;
+        }
+
+        .agent-activity {
+            font-size: 0.7rem;
+            color: var(--neural-blue);
+        }
+
+        .console-area {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'Courier New', monospace;
+            min-height: 200px;
+            margin-bottom: 1rem;
+        }
+
+        .console-output {
+            color: var(--energy-green);
+            font-size: 0.8rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+
+        .console-input {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .console-prompt {
+            color: var(--neural-blue);
+            font-size: 0.8rem;
+        }
+
+        .console-input input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--accent);
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            outline: none;
+        }
+
+        .send-btn {
+            background: var(--neural-blue);
+            color: var(--primary);
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .send-btn:hover {
+            background: var(--energy-green);
+        }
+
+        /* AgenticCard Styling */
+        .agentic-card {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .card-info {
+            margin: 1rem 0;
+        }
+
+        .card-info p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .card-info span {
+            color: var(--neural-blue);
+            font-weight: 500;
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .card-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 80px;
+        }
+
+        .card-btn.primary {
+            background: var(--energy-green);
+            color: var(--primary);
+        }
+
+        .card-btn.secondary {
+            background: var(--neural-blue);
+            color: var(--primary);
+        }
+
+        .card-btn.tertiary {
+            background: var(--quantum-purple);
+            color: var(--accent);
+        }
+
+        .card-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .metric-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--neural-blue);
+            margin-bottom: 0.25rem;
+        }
+
+        .metric-label {
+            font-size: 0.75rem;
+            color: var(--platinum);
+        }
+
+        .activity-feed {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 1rem;
+            padding: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-time {
+            font-size: 0.7rem;
+            color: var(--platinum);
+            min-width: 60px;
+        }
+
+        .activity-text {
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+
+        .action-btn {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--neural-blue);
+            color: var(--neural-blue);
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .action-btn:hover {
+            background: var(--neural-blue);
+            color: var(--primary);
+        }
+
+        @media (max-width: 1024px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .agent-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav-logo">AGENTIC🌐</a>
+            <div class="nav-links">
+                <button onclick="window.location.href='aiva.html'">AIVA</button>
+                <button onclick="window.location.href='fugio.html'">Fugio</button>
+                <button onclick="window.location.href='vibecoder.html'">VibeCoder</button>
+                <button onclick="window.location.href='enterprise.html'">Enterprise</button>
+                <button onclick="window.location.href='contact.html'">Contact</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h1>📊 Agentic Web Dashboard</h1>
+                    <div class="dashboard-subtitle">Real-time AI infrastructure control center</div>
+                </div>
+                <div class="status-indicator">
+                    <div class="status-dot"></div>
+                    <span>All Systems Online</span>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="main-panel">
+                    <!-- Agent Activity -->
+                    <div class="panel">
+                        <h3>🤖 Agent Activity</h3>
+                        <div class="agent-grid">
+                            <div class="agent-card">
+                                <div class="agent-header">
+                                    <div class="agent-name">Support Agent</div>
+                                    <div class="agent-status"></div>
+                                </div>
+                                <div class="agent-role">Customer Support</div>
+                                <div class="agent-activity">Processing 3 tickets</div>
+                            </div>
+                            <div class="agent-card">
+                                <div class="agent-header">
+                                    <div class="agent-name">DevOps Agent</div>
+                                    <div class="agent-status"></div>
+                                </div>
+                                <div class="agent-role">Infrastructure</div>
+                                <div class="agent-activity">Monitoring deployments</div>
+                            </div>
+                            <div class="agent-card">
+                                <div class="agent-header">
+                                    <div class="agent-name">Analyst Agent</div>
+                                    <div class="agent-status"></div>
+                                </div>
+                                <div class="agent-role">Data Analysis</div>
+                                <div class="agent-activity">Generating reports</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Command Console -->
+                    <div class="panel">
+                        <h3>💻 Command Console</h3>
+                        <div class="console-area">
+                            <div class="console-output" id="console-output">
+                                [2024-01-15 14:32:15] System initialized successfully<br>
+                                [2024-01-15 14:32:16] Agents online: 3/3<br>
+                                [2024-01-15 14:32:17] Memory usage: 2.5GB / 10GB<br>
+                                [2024-01-15 14:32:18] Ready for commands...<br>
+                            </div>
+                            <div class="console-input">
+                                <span class="console-prompt">agentic@web:~$</span>
+                                <input type="text" id="command-input" placeholder="Enter command..." onkeypress="handleCommand(event)">
+                                <button class="send-btn" onclick="sendCommand()">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="side-panel">
+                    <!-- AgenticCard Balance -->
+                    <div class="panel agentic-card">
+                        <h3>💳 AgenticCard Balance</h3>
+                        <div class="card-info">
+                            <p><strong>Holder:</strong> <span id="card-holder">yourname.hns.id</span></p>
+                            <p><strong>Card ID:</strong> <span id="card-id">4256 •••• •••• 8912</span></p>
+                            <p><strong>Balance:</strong> <span id="card-balance">$173.42</span></p>
+                            <p><strong>Credit Available:</strong> <span id="credit-available">$2,500.00</span></p>
+                            <p><strong>Fugio Score:</strong> <span id="fugio-score">742 (Excellent)</span></p>
+                        </div>
+                        <div class="card-actions">
+                            <button class="card-btn primary" onclick="reloadCard()">💰 Reload</button>
+                            <button class="card-btn secondary" onclick="viewLedger()">📊 Ledger</button>
+                            <button class="card-btn tertiary" onclick="window.location.href='agenticcard-portal.html'">🔐 Portal</button>
+                        </div>
+                    </div>
+
+                    <!-- Usage Metrics -->
+                    <div class="panel">
+                        <h3>📈 Usage Snapshot</h3>
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">2.5GB</div>
+                                <div class="metric-label">Memory Used</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">3.1h</div>
+                                <div class="metric-label">Compute Time</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">127</div>
+                                <div class="metric-label">API Calls</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">99.9%</div>
+                                <div class="metric-label">Uptime</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="panel">
+                        <h3>🔔 Recent Activity</h3>
+                        <div class="activity-feed">
+                            <div class="activity-item">
+                                <div class="activity-time">14:32</div>
+                                <div class="activity-text">Support Agent resolved ticket #1247</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-time">14:28</div>
+                                <div class="activity-text">DevOps Agent deployed update v2.1.3</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-time">14:25</div>
+                                <div class="activity-text">Analyst Agent completed monthly report</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-time">14:20</div>
+                                <div class="activity-text">Memory optimization completed</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-time">14:15</div>
+                                <div class="activity-text">New team member added to workspace</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="panel">
+                        <h3>⚡ Quick Actions</h3>
+                        <div class="quick-actions">
+                            <button class="action-btn" onclick="quickAction('train')">Train Agent</button>
+                            <button class="action-btn" onclick="quickAction('deploy')">Deploy Model</button>
+                            <button class="action-btn" onclick="quickAction('backup')">Backup Data</button>
+                            <button class="action-btn" onclick="quickAction('scale')">Scale Resources</button>
+                            <button class="action-btn" onclick="quickAction('monitor')">View Logs</button>
+                            <button class="action-btn" onclick="quickAction('settings')">Settings</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function handleCommand(event) {
+            if (event.key === 'Enter') {
+                sendCommand();
+            }
+        }
+
+        function sendCommand() {
+            const input = document.getElementById('command-input');
+            const output = document.getElementById('console-output');
+            const command = input.value.trim();
+            
+            if (command) {
+                const timestamp = new Date().toLocaleTimeString();
+                output.innerHTML += `[${timestamp}] $ ${command}<br>`;
+                
+                // Simulate command responses
+                setTimeout(() => {
+                    let response = '';
+                    switch(command.toLowerCase()) {
+                        case 'status':
+                            response = 'All agents online. System healthy.';
+                            break;
+                        case 'help':
+                            response = 'Available commands: status, agents, memory, deploy, train, backup';
+                            break;
+                        case 'agents':
+                            response = 'Active agents: Support (online), DevOps (online), Analyst (online)';
+                            break;
+                        case 'memory':
+                            response = 'Memory usage: 2.5GB / 10GB (25% utilized)';
+                            break;
+                        default:
+                            response = `Command '${command}' executed successfully.`;
+                    }
+                    output.innerHTML += `[${new Date().toLocaleTimeString()}] ${response}<br>`;
+                    output.scrollTop = output.scrollHeight;
+                }, 500);
+                
+                input.value = '';
+                output.scrollTop = output.scrollHeight;
+            }
+        }
+
+        function quickAction(action) {
+            const output = document.getElementById('console-output');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            const actions = {
+                'train': 'Initiating agent training session...',
+                'deploy': 'Deploying model to production environment...',
+                'backup': 'Creating system backup...',
+                'scale': 'Scaling compute resources...',
+                'monitor': 'Opening system logs...',
+                'settings': 'Opening configuration panel...'
+            };
+            
+            output.innerHTML += `[${timestamp}] ${actions[action]}<br>`;
+            output.scrollTop = output.scrollHeight;
+        }
+
+        // AgenticCard Functions
+        function reloadCard() {
+            alert('💳 AgenticCard Reload\n\nChoose reload method:\n• CrossMint Wallet\n• USDC/ETH Transfer\n• Fiat ACH/Wire\n• Staking Rewards\n\nRedirecting to reload portal...');
+        }
+
+        function viewLedger() {
+            alert('📊 Protocol Credit Ledger\n\nRecent Transactions:\n• $24.50 - AIVA Compute Credits\n• $31.20 - Staking Rewards (Auto)\n• $15.75 - VibeCoder Pro Access\n• $8.30 - Fugio Protocol Fees\n\nTotal Protocol Spend: $1,247.83\nAvailable Credit: $2,500.00\nFugio Score: 742 (Excellent)');
+        }
+
+        // Simulate real-time updates
+        setInterval(() => {
+            const activities = [
+                'Agent processed new request',
+                'Memory optimization completed',
+                'Backup checkpoint created',
+                'Performance metrics updated',
+                'Security scan completed'
+            ];
+            
+            const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+            const timestamp = new Date().toLocaleTimeString();
+            
+            // Update console occasionally
+            if (Math.random() < 0.1) {
+                const output = document.getElementById('console-output');
+                output.innerHTML += `[${timestamp}] ${randomActivity}<br>`;
+                output.scrollTop = output.scrollHeight;
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ForkD - The Dev Terminal of the New Internet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #FFFFFF;
+            --neural-blue: #00D4FF;
+            --quantum-purple: #8B5CF6;
+            --energy-green: #10B981;
+            --gold: #D4AF37;
+            --platinum: #E5E7EB;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary);
+            color: var(--accent);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 120px 4rem 8rem 4rem;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 4rem;
+            z-index: 1000;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-logo:hover {
+            color: var(--neural-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links button:hover {
+            color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+            margin-bottom: 2rem;
+            font-size: 0.9rem;
+            color: var(--gold);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 100;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--neural-blue);
+            font-weight: 200;
+            margin-bottom: 2rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--platinum);
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            line-height: 1.6;
+        }
+
+        /* CTA Buttons */
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+        }
+
+        .cta-btn {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .cta-btn.primary {
+            background: var(--gold);
+            color: var(--primary);
+            border-color: var(--gold);
+        }
+
+        .cta-btn.primary:hover {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        .cta-btn.secondary {
+            background: transparent;
+            color: var(--neural-blue);
+            border-color: var(--neural-blue);
+        }
+
+        .cta-btn.secondary:hover {
+            background: var(--neural-blue);
+            color: var(--primary);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            color: var(--gold);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            color: var(--platinum);
+            line-height: 1.6;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin: 6rem 0 4rem 0;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 6vw, 4rem);
+            font-weight: 100;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.2rem;
+            color: var(--neural-blue);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 4rem 0;
+            overflow-x: auto;
+        }
+
+        .comparison-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .comparison-table th {
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            color: var(--platinum);
+        }
+
+        .comparison-table .highlight {
+            color: var(--neural-blue);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 6rem;
+        }
+
+        .footer p {
+            color: var(--platinum);
+            margin-bottom: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: var(--neural-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        /* Protocol Links */
+        .protocol-links {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 95;
+        }
+
+        .protocol-links-container {
+            display: flex;
+            gap: 1rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 0.75rem 1.5rem;
+        }
+
+        .protocol-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--platinum);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 300;
+            transition: all 0.3s ease;
+            padding: 0.25rem 0.75rem;
+            border-radius: 25px;
+        }
+
+        .protocol-link:hover {
+            color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        .protocol-icon {
+            font-size: 1rem;
+        }
+
+        .protocol-text {
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.02em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo" onclick="window.location.href='index.html'">AGENTIC🌐</div>
+        <div class="nav-links">
+            <button onclick="window.location.href='aiva.html'">AIVA</button>
+            <button onclick="window.location.href='fugio.html'">Fugio</button>
+            <button onclick="window.location.href='vibecoder.html'">VibeCoder</button>
+            <button onclick="window.location.href='forkd.html'">ForkD</button>
+            <button onclick="window.location.href='enterprise.html'">Enterprise</button>
+            <button onclick="window.location.href='contact.html'">Contact</button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-badge">
+                <span>⚙️</span>
+                <span>Protocol-Native Development Terminal</span>
+            </div>
+            <h1>FORKD</h1>
+            <h2>The Dev Terminal of the New Internet</h2>
+            <p>FORKD is the world's first protocol-native development terminal. Built for the Agentic Web, it lets you fork AI agents, infrastructure, smart contracts, codebases, or entire protocols — and launch them under your own domain, identity, and economic model.</p>
+            
+            <div class="cta-buttons">
+                <a href="#" class="cta-btn primary" onclick="alert('🚀 ForkD Access\n\nForkD is currently in development.\n\nJoin the waitlist for early access to:\n• Fork-to-deploy infrastructure\n• AI-assisted build flows\n• Protocol monetization\n• Sovereign deployment\n\nContact: forkd@agenticweb.com')">
+                    <span>🚀</span>
+                    <span>Join Waitlist</span>
+                </a>
+                <a href="#features" class="cta-btn secondary">
+                    <span>📖</span>
+                    <span>Learn More</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Core Premise -->
+        <div class="section-header">
+            <h2>Forks are Freedom</h2>
+            <p>This isn't open source. This is open ownership.</p>
+        </div>
+
+        <!-- What You Can Fork -->
+        <div class="features-grid" id="features">
+            <div class="feature-card">
+                <div class="feature-icon">🤖</div>
+                <h3>AI Agents</h3>
+                <p>Fork an AI assistant, customize behavior, sell access. Example: agent.chatlife</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📦</div>
+                <h3>Codebases</h3>
+                <p>Deploy your own clone of any hosted project. Example: repo.forkd</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛠️</div>
+                <h3>Apps/Tools</h3>
+                <p>Fork SaaS products into white-labeled clones. Example: myform.forkd</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3>Protocols</h3>
+                <p>Fork base-layer logic for new chain experiments. Example: dex.forkd</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>AI Models</h3>
+                <p>Fork LLMs or AI pipelines into your own training suite. Example: worldmodel.forkd</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌐</div>
+                <h3>Sites/Handles</h3>
+                <p>Clone full websites and identity stacks. Example: yourbrand.forkd</p>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="section-header">
+            <h2>Key Features</h2>
+            <p>Protocol-native development infrastructure</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🧬</div>
+                <h3>Fork-to-Deploy</h3>
+                <p>No need for DevOps or setup. Fork, customize, and push live under your handle. One-click deployment to AgenticWeb hosting or external infra.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🧠</div>
+                <h3>AI-Assisted Build Flow</h3>
+                <p>Auto-generate code, documentation, branding, and UX. Train AI agents to handle product support, marketing, and onboarding.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💸</div>
+                <h3>Monetize Every Fork</h3>
+                <p>Built-in usage tracking. Auto revenue splits when others fork your fork. Tokenized ownership of your stack via AYDs.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3>Permissionless but Protectable</h3>
+                <p>Choose open, licensed, private, or paid forks. Set fork rules, clone tiers, or community governance. You own the domain. You own the downstream.</p>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="section-header">
+            <h2>FORKD vs. Everything Else</h2>
+            <p>Built for the sovereign internet</p>
+        </div>
+
+        <div class="comparison-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Platform</th>
+                        <th class="highlight">FORKD</th>
+                        <th>GitHub</th>
+                        <th>Vercel</th>
+                        <th>HuggingFace</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>AI-native</strong></td>
+                        <td class="highlight">✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>⚠️</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fork-to-Monetize</strong></td>
+                        <td class="highlight">✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>⚠️</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Deployable from UI</strong></td>
+                        <td class="highlight">✅</td>
+                        <td>❌</td>
+                        <td>✅</td>
+                        <td>✅</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ownable under TLD</strong></td>
+                        <td class="highlight">✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Agentic Compatible</strong></td>
+                        <td class="highlight">✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Web3 Integrated</strong></td>
+                        <td class="highlight">✅</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                        <td>❌</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Who FORKD Is For -->
+        <div class="section-header">
+            <h2>Who FORKD Is For</h2>
+            <p>Sovereign creators, AI-native developers, and agentic systems</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">👩‍💻</div>
+                <h3>Developers</h3>
+                <p>Fork faster, deploy easier, monetize every project</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Founders</h3>
+                <p>Turn ideas into products — with AI agents + infra built-in</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Creators</h3>
+                <p>Launch viral tools, branded SaaS, agentic services</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3>Protocol Engineers</h3>
+                <p>Spin up L2s, testing layers, or governance forks</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <h3>Educators/Trainers</h3>
+                <p>Build labs, tools, AI mentors for any subject</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏛️</div>
+                <h3>DAOs + Ecosystems</h3>
+                <p>Clone infrastructure and localize it to your community</p>
+            </div>
+        </div>
+
+        <!-- The Bigger Picture -->
+        <div class="section-header">
+            <h2>The Bigger Picture</h2>
+            <p>FORKD is the build layer of the new internet</p>
+        </div>
+
+        <div style="text-align: center; max-width: 800px; margin: 0 auto 4rem auto;">
+            <p style="font-size: 1.2rem; color: var(--platinum); line-height: 1.8; margin-bottom: 2rem;">
+                Where GitHub was made for teams and corporations — FORKD was built for sovereign creators, AI-native developers, and agentic systems.
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0;">
+                <div style="color: var(--gold); font-weight: 500;">Every fork is a node.</div>
+                <div style="color: var(--neural-blue); font-weight: 500;">Every repo is a business.</div>
+                <div style="color: var(--energy-green); font-weight: 500;">Every handle is a domain.</div>
+                <div style="color: var(--quantum-purple); font-weight: 500;">Every launch is sovereign.</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>FORKD is not a platform. It's a protocol for creative sovereignty.</p>
+            <p>You don't just build on the new internet. You own it.</p>
+            <div class="footer-links">
+                <a href="index.html">← Back to Agentic Web</a>
+                <a href="#" onclick="alert('📧 Contact ForkD Team\n\nforkd@agenticweb.com\n\nJoin the waitlist for early access to the protocol-native development terminal.')">Contact Team</a>
+                <a href="#" onclick="alert('📚 ForkD Documentation\n\nTechnical specifications and implementation guides coming soon.\n\nJoin the waitlist for early access.')">Documentation</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Protocol Links -->
+    <div class="protocol-links">
+        <div class="protocol-links-container">
+            <a href="https://get.poweredbyai" target="_blank" class="protocol-link">
+                <span class="protocol-icon">🤖</span>
+                <span class="protocol-text">get.poweredbyai</span>
+            </a>
+            <a href="https://agi.unifiedai" target="_blank" class="protocol-link">
+                <span class="protocol-icon">🧠</span>
+                <span class="protocol-text">agi.unifiedai</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

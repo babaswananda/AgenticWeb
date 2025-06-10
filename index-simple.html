@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic Web - The Future of Intelligence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #000000;
+            --accent: #ffffff;
+            --neural-blue: #00D4FF;
+            --quantum-purple: #8B5CF6;
+            --energy-green: #10B981;
+            --gold: #D4AF37;
+            --platinum: #E5E4E2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--primary);
+            color: var(--accent);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
+            font-weight: 200;
+            color: var(--accent);
+            letter-spacing: 0.1em;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo:hover {
+            color: var(--neural-blue);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 300;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+        }
+
+        .nav-links button:hover {
+            color: var(--neural-blue);
+            background: rgba(0, 212, 255, 0.1);
+        }
+
+        /* Main Content */
+        .main {
+            padding: 120px 0 80px 0;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .hero-title {
+            margin-bottom: 3rem;
+        }
+
+        .hero-title h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 100;
+            color: var(--platinum);
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-title h2 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 100;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 50%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            line-height: 0.9;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: var(--neural-blue);
+            font-weight: 200;
+            margin-bottom: 4rem;
+            letter-spacing: 0.05em;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--neural-blue) 0%, var(--quantum-purple) 100%);
+            color: var(--accent);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 2rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 4rem 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--neural-blue);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--platinum);
+            font-weight: 300;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            background: var(--primary);
+            margin-top: 4rem;
+        }
+
+        .footer p {
+            color: var(--platinum);
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+            <a href="index.html" class="nav-logo">AGENTIC🌐</a>
+            <div class="nav-links">
+                <button onclick="window.location.href='aiva.html'">AIVA</button>
+                <button onclick="window.location.href='fugio.html'">Fugio</button>
+                <button onclick="window.location.href='vibecoder.html'">VibeCoder</button>
+                <button onclick="window.location.href='enterprise.html'">Enterprise</button>
+                <button onclick="window.location.href='contact.html'">Contact</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <div class="hero-title">
+                <h1>Welcome to the</h1>
+                <h2>Agentic Web</h2>
+            </div>
+            
+            <p class="hero-subtitle">The Future of Intelligence</p>
+            
+            <button class="cta-button" onclick="window.location.href='auth-portal.html'">
+                🚀 INITIALIZE PROTOCOL
+            </button>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <span class="feature-icon">🧠</span>
+                    <h3>AIVA</h3>
+                    <p>Neural Voice Interface for intelligent conversations and AI-powered assistance.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h3>Fugio Protocol</h3>
+                    <p>Quantum Economics Engine powering decentralized AI infrastructure.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">💻</span>
+                    <h3>VibeCoder</h3>
+                    <p>Neural Development Suite for next-generation software engineering.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <span class="feature-icon">💳</span>
+                    <h3>AgenticCard</h3>
+                    <p>Protocol-native payment identity for the AI internet ecosystem.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Agentic Web. The Future of Intelligence.</p>
+        </div>
+    </footer>
+
+    <script>
+        console.log('🚀 Agentic Web - Simple version loaded successfully!');
+        
+        // Simple initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ DOM loaded, page ready');
+        });
+    </script>
+</body>
+</html>
